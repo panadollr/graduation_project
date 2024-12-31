@@ -1,0 +1,42 @@
+<?php
+
+return [
+    'accepted'             => 'Bạn phải chấp nhận :attribute.',
+    'active_url'           => ':attribute không phải là một URL hợp lệ.',
+    'after'                => ':attribute phải là một ngày sau :date.',
+    'after_or_equal'       => ':attribute phải là một ngày sau hoặc bằng :date.',
+    'alpha'                => ':attribute chỉ có thể chứa các chữ cái.',
+    'alpha_dash'           => ':attribute chỉ có thể chứa các chữ cái, chữ số, dấu gạch ngang và gạch dưới.',
+    'alpha_num'            => ':attribute chỉ có thể chứa các chữ cái và chữ số.',
+    'array'                => ':attribute phải là một mảng.',
+    'before'               => ':attribute phải là một ngày trước :date.',
+    'before_or_equal'      => ':attribute phải là một ngày trước hoặc bằng :date.',
+    'between'              => [
+        'numeric' => ':attribute phải nằm trong khoảng từ :min đến :max.',
+        'file'    => ':attribute phải có kích thước từ :min đến :max kilobyte.',
+        'string'  => ':attribute phải có độ dài từ :min đến :max ký tự.',
+        'array'   => ':attribute phải có từ :min đến :max phần tử.',
+    ],
+    'boolean'              => ':attribute phải là true hoặc false.',
+    'confirmed'            => ':attribute xác nhận không khớp.',
+    'date'                 => ':attribute không phải là một ngày hợp lệ.',
+    'date_equals'          => ':attribute phải là ngày :date.',
+    'date_format'          => ':attribute không khớp với định dạng ngày :format.',
+    'different'            => ':attribute và :other phải khác nhau.',
+    'digits'               => ':attribute phải là một số gồm :digits chữ số.',
+    'digits_between'       => ':attribute phải có từ :min đến :max chữ số.',
+    'dimensions'           => ':attribute có kích thước không hợp lệ.',
+    'distinct'             => ':attribute có giá trị trùng lặp.',
+    'email'                => ':attribute phải là một địa chỉ email hợp lệ.',
+    'ends_with'            => ':attribute phải kết thúc bằng một trong các giá trị sau: :values.',
+    'exists'               => ':attribute không hợp lệ.',
+    'file'                 => ':attribute phải là một file.',
+    'filled'               => ':attribute là bắt buộc.',
+    'gt'                   => [
+        'numeric' => ':attribute phải lớn hơn :value.',
+        'file'    => ':attribute phải lớn hơn :value kilobyte.',
+        'string'  => ':attribute phải dài hơn :value ký tự.',
+        'array'   => ':attribute phải có nhiều hơn :value phần tử.',
+    ],
+    // ... Tiếp tục với các thông báo lỗi khác
+];

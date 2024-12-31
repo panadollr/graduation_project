@@ -1,0 +1,102 @@
+{
+    "samples": [
+        "mua laptop giá dưới 20 triệu",
+        "điện thoại iPhone giá từ 15 triệu đến 25 triệu",
+        "tìm máy ảnh Canon giá rẻ hơn 10 triệu",
+        "smartphone Oppo giá dưới 5 triệu",
+        "laptop giá cao hơn 30 triệu đồng",
+        "máy ảnh giá trong khoảng 20 đến 40 triệu",
+        "điện thoại Samsung dưới 10 triệu đồng",
+        "máy tính bảng giá rẻ dưới 7 triệu",
+        "PC gaming giá trên 50 triệu",
+        "tìm kiếm điện thoại Xiaomi giá 10-20 triệu",
+        "laptop gaming dưới 25 triệu",
+        "camera Sony giá khoảng 15 triệu",
+        "tìm smartphone Samsung giá rẻ nhất",
+        "điện thoại giá rẻ không quá 5 triệu",
+        "laptop Dell giá từ 10 triệu đến 20 triệu",
+        "tìm máy ảnh giá dưới 30 triệu đồng",
+        "máy tính bảng Apple từ 20 triệu",
+        "điện thoại cao cấp giá hơn 50 triệu",
+        "laptop giá từ 15 triệu",
+        "máy tính xách tay Lenovo dưới 10 triệu",
+        "máy ảnh Nikon giá trên 20 triệu",
+        "tìm smartphone giá 8 triệu",
+        "máy ảnh giá không quá 12 triệu"
+    ],
+    "labels": [
+        { "category": "laptop", "price_condition": "<= 20000000" },
+        {
+            "category": "dien-thoại",
+            "brand": "iPhone",
+            "price_condition": ">= 15000000 && <= 25000000"
+        },
+        {
+            "category": "camera",
+            "brand": "Canon",
+            "price_condition": "<= 10000000"
+        },
+        {
+            "category": "smartphone",
+            "brand": "Oppo",
+            "price_condition": "<= 5000000"
+        },
+        { "category": "laptop", "price_condition": ">= 30000000" },
+        {
+            "category": "camera",
+            "price_condition": ">= 20000000 && <= 40000000"
+        },
+        {
+            "category": "dien-thoại",
+            "brand": "Samsung",
+            "price_condition": "<= 10000000"
+        },
+        { "category": "tablet", "price_condition": "<= 7000000" },
+        { "category": "PC", "price_condition": ">= 50000000" },
+        {
+            "category": "dien-thoại",
+            "brand": "Xiaomi",
+            "price_condition": ">= 10000000 && <= 20000000"
+        },
+        {
+            "category": "laptop",
+            "price_condition": "<= 25000000"
+        },
+        {
+            "category": "camera",
+            "brand": "Sony",
+            "price_condition": "== 15000000"
+        },
+        {
+            "category": "smartphone",
+            "brand": "Samsung",
+            "price_condition": "lowest"
+        },
+        { "category": "dien-thoại", "price_condition": "<= 5000000" },
+        {
+            "category": "laptop",
+            "brand": "Dell",
+            "price_condition": ">= 10000000 && <= 20000000"
+        },
+        { "category": "camera", "price_condition": "<= 30000000" },
+        {
+            "category": "tablet",
+            "brand": "Apple",
+            "price_condition": ">= 20000000"
+        },
+        { "category": "dien-thoại", "price_condition": ">= 50000000" },
+        { "category": "laptop", "price_condition": ">= 15000000" },
+        {
+            "category": "laptop",
+            "brand": "Lenovo",
+            "price_condition": "<= 10000000"
+        },
+        {
+            "category": "camera",
+            "brand": "Nikon",
+            "price_condition": ">= 20000000"
+        },
+        { "category": "dien-thoại", "price_condition": "== 8000000" },
+        { "category": "camera", "price_condition": "<= 12000000" }
+    ]
+}

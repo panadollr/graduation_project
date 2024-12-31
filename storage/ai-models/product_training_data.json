@@ -1,0 +1,30 @@
+{
+    "samples": [
+        "laptop giá dưới 20 triệu",
+        "điện thoại Samsung giá dưới 10 triệu",
+        "laptop giá trên 30 triệu",
+        "máy ảnh Sony giá trên 30 triệu",
+        "điện thoại giá trên 30 triệu",
+        "điện thoại iPhone giá trên 20 triệu"
+    ],
+    "labels": [
+        { "category": "laptop", "price_condition": "<= 20000000" },
+        {
+            "category": "phone",
+            "brand": "Samsung",
+            "price_condition": "<= 10000000"
+        },
+        { "category": "laptop", "price_condition": ">= 30000000" },
+        {
+            "category": "camera",
+            "brand": "Sony",
+            "price_condition": ">= 30000000"
+        },
+        { "category": "phone", "price_condition": ">= 30000000" },
+        {
+            "category": "phone",
+            "brand": "iPhone",
+            "price_condition": ">= 20000000"
+        }
+    ]
+}
