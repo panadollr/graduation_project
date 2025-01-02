@@ -2,9 +2,9 @@
 
 namespace App\Livewire\Client\Account;
 
+use App\Models\Setting;
 use App\Models\UserAddress;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 
 class MyAddresses extends Component
@@ -26,15 +26,15 @@ class MyAddresses extends Component
         $this->addresses = UserAddress::where('user_id', Auth::id())
             ->orderBy('is_default', 'desc')
             ->get()
-            ->toArray();
+            ;
 
             // Load danh sách quận dựa trên các thành phố có trong danh sách địa chỉ
-        $cityIds = array_unique(array_column($this->addresses, 'city'));
+        $cityIds = array_unique(array_column($this->addresses->toArray(), 'city'));
         foreach ($cityIds as $cityId) {
             $this->quanList[$cityId] = $this->loadQuanForCity($cityId);
         }
 
-        $districtIds = array_unique(array_column($this->addresses, 'district'));
+        $districtIds = array_unique(array_column($this->addresses->toArray(), 'district'));
         foreach ($districtIds as $districtId) {
             $this->phuongList[$districtId] = $this->loadPhuongForDistrict($districtId);
         }
@@ -42,13 +42,15 @@ class MyAddresses extends Component
 
     public function loadTinh()
     {
-        $response = Http::get('https://esgoo.net/api-tinhthanh/1/0.htm');
-        if ($response->successful()) {
-            $data = $response->json();
-            if ($data['error'] === 0) {
-                $this->tinhList = $data['data'];
-            }
-        }
+        $this->tinhList = Setting::where('key', 'cities')
+            ->get()
+            ->map(function ($item) {
+                return [
+                    'id' => json_decode($item->value, true)['id'], // Lấy ID từ JSON trong cột `value`
+                    'name' => $item->name, // Lấy tên từ cột `name`
+                ];
+            })
+            ->toArray();
     }
 
     public function updatedTinh(){
@@ -61,49 +63,43 @@ class MyAddresses extends Component
 
     private function loadQuanForCity($cityId)
     {
-        $response = Http::get("https://esgoo.net/api-tinhthanh/2/{$cityId}.htm");
-        if ($response->successful()) {
-            $data = $response->json();
-            if ($data['error'] === 0) {
-                return $data['data'];
-            }
-        }
-        return [];
+        return Setting::where('key', 'districts')
+            ->whereJsonContains('value->parent_id', $cityId)
+            ->get()
+            ->map(function ($item) {
+                return [
+                    'id' => json_decode($item->value, true)['id'], // Lấy ID từ JSON trong cột `value`
+                    'parent_id' => json_decode($item->value, true)['parent_id'], // Lấy ID từ JSON trong cột `value`
+                    'name' => $item->name, // Lấy tên từ cột `name`
+                ];
+            })
+            ->toArray();
     }
 
     private function loadPhuongForDistrict($districtId)
     {
-        $response = Http::get("https://esgoo.net/api-tinhthanh/3/{$districtId}.htm");
-        if ($response->successful()) {
-            $data = $response->json();
-            if ($data['error'] === 0) {
-                return $data['data'];
-            }
-        }
-        return [];
+        return Setting::where('key', 'wards')
+            ->whereJsonContains('value->parent_id', $districtId)
+            ->get()
+            ->map(function ($item) {
+                return [
+                    'id' => json_decode($item->value, true)['id'], // Lấy ID từ JSON trong cột `value`
+                    'parent_id' => json_decode($item->value, true)['parent_id'], // Lấy ID từ JSON trong cột `value`
+                    'name' => $item->name, // Lấy tên từ cột `name`
+                ];
+            })
+            ->toArray();
     }
 
     public function loadQuan($tinhId)
     {
         $this->resetQuanAndPhuong();
-        $response = Http::get("https://esgoo.net/api-tinhthanh/2/{$tinhId}.htm");
-        if ($response->successful()) {
-            $data = $response->json();
-            if ($data['error'] === 0) {
-                $this->quanList = $data['data'];
-            }
-        }
+        $this->quanList = $this->loadQuanForCity($tinhId);
     }
 
     public function loadPhuong($quanId)
     {
-        $response = Http::get("https://esgoo.net/api-tinhthanh/3/{$quanId}.htm");
-        if ($response->successful()) {
-            $data = $response->json();
-            if ($data['error'] === 0) {
-                $this->phuongList = $data['data'];
-            }
-        }
+        $this->phuongList = $this->loadPhuongForDistrict($quanId);
     }
 
     public function openModal()
@@ -121,9 +117,7 @@ class MyAddresses extends Component
 
     public function saveAddress()
     { 
-        try {
-            //code...
-        
+        try {        
         $this->validate([
             'name' => 'required',
             'phone' => 'required',

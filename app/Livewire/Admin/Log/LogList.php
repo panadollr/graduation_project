@@ -46,7 +46,7 @@ class LogList extends Component
                 $query->whereDate('created_at', '<=', $this->filterEndDate);
             })
             ->orderBy($this->sortField, $this->sortDirection)
-            ->paginate(10);
+            ->paginate(7);
 
         return view('livewire.admin.log.log-list', [
             'logs' => $logs,

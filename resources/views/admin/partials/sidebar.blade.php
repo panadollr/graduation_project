@@ -48,7 +48,7 @@
     
 
     <li class="nav-item {{ request()->routeIs('admin.review.index') ? 'active' : '' }}">
-      <a wire:navigate class="nav-link" href="{{ route('admin.review.index') }}">
+      <a class="nav-link" href="{{ route('admin.review.index') }}">
         <i class="menu-icon mdi mdi-comment-outline"></i>
         <span class="menu-title">Đánh giá</span>
       </a>
@@ -62,35 +62,35 @@
     </li>
 
     <li class="nav-item {{ request()->routeIs('admin.shipping-method.index') ? 'active' : '' }}">
-      <a wire:navigate class="nav-link" href="{{ route('admin.shipping-method.index') }}">
+      <a class="nav-link" href="{{ route('admin.shipping-method.index') }}">
           <i class="menu-icon mdi mdi-truck-outline"></i>
           <span class="menu-title">Đơn vị vận chuyển</span>
       </a>
     </li>  
 
     <li class="nav-item {{ request()->routeIs('admin.user.index') ? 'active' : '' }}">
-      <a wire:navigate class="nav-link" href="{{ route('admin.user.index') }}">
+      <a class="nav-link" href="{{ route('admin.user.index') }}">
         <i class="menu-icon mdi mdi-account-group-outline"></i>
         <span class="menu-title">Người dùng</span>
       </a>
     </li>
     
     <li class="nav-item {{ request()->routeIs('admin.slider.index') ? 'active' : '' }}">
-      <a wire:navigate class="nav-link" href="{{ route('admin.slider.index') }}">
+      <a class="nav-link" href="{{ route('admin.slider.index') }}">
         <i class="menu-icon mdi mdi-view-carousel"></i>
         <span class="menu-title">Slider</span>
       </a>
     </li>
 
     <li  class="nav-item {{ request()->routeIs('admin.blog.index') || request()->routeIs('admin.blog.create') || request()->routeIs('admin.blog.edit') ? 'active' : '' }}">
-      <a wire:navigate class="nav-link" href="{{ route('admin.blog.index') }}">
+      <a class="nav-link" href="{{ route('admin.blog.index') }}">
         <i class="menu-icon mdi mdi-ticket-percent"></i>
         <span class="menu-title">Bài viết</span>
       </a>
     </li>
 
     <li class="nav-item {{ request()->routeIs('admin.log.index') ? 'active' : '' }}">
-      <a wire:navigate class="nav-link" href="{{ route('admin.log.index') }}">
+      <a class="nav-link" href="{{ route('admin.log.index') }}">
           <i class="menu-icon mdi mdi-history"></i>
           <span class="menu-title">Nhật ký hoạt động</span>
       </a>

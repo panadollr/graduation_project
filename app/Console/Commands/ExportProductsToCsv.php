@@ -30,20 +30,23 @@ class ExportProductsToCsv extends Command
     public function handle()
     {
         // Get all products with required columns
-        $products = Product::select('name', 'base_price', 'discount_percentage', 'description')->get();
+        $products = Product::select('name', 'base_price', 'sale_price', 'discount_percentage', 'description', 'short_description')->get();
 
         // Define the CSV header
-        $csvHeader = ['Tên sản phẩm', 'Giá gốc', 'Phần trăm giảm giá', 'Mô tả sản phẩm'];
+        $csvHeader = ['Tên sản phẩm', 'Giá gốc', 'Giá đang bán', 'Phần trăm giảm giá', 'Mô tả sản phẩm'];
 
         // Start building the CSV content
         $csvContent = [implode(',', $csvHeader)];
 
         foreach ($products as $product) {
+            $combinedDescription = trim(strip_tags($product->description . ' ' . $product->short_description));
+
             $csvContent[] = implode(',', [
                 $this->escapeCsvValue($product->name),
                 $product->base_price,
+                $product->sale_price,
                 $product->discount_percentage,
-                $this->escapeCsvValue($product->description),
+                $this->escapeCsvValue($combinedDescription),
             ]);
         }
 

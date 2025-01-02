@@ -2,7 +2,7 @@
     <h2 class="title text-center mb-2">Danh mục nổi bật</h2><!-- End .title -->
 
     <div class="cat-blocks-container">
-        <div class="row">
+        <div class="row justify-content-center">
             @foreach($popularCategories as $category)
             <div class="col-6 col-sm-4 col-lg-2">
                 <a href="{{ route('list', ['category_slug' => $category->slug])}}" class="cat-block">

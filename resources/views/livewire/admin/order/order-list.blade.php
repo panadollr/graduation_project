@@ -92,27 +92,100 @@
                 <div class="container-fluid">
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item me-4">
-                                <x-admin.filter-dropdown
-                                    :items="$statuses" 
-                                    label="Trạng thái đơn hàng"
-                                    selectedLabel=" {{ $filterStatus ? $statuses[$filterStatus] : 'Tất cả' }}" 
-                                    clickAction="filterByStatus" 
-                                />
-                            </li>
-                           
+                            <div class="dropdown">
+                                <button class="btn btn-inverse btn-fw dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Trạng thái đơn hàng
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#" wire:click="$set('filterStatus', null)">Tất cả</a></li>
+                                    @foreach($statuses as $key => $label)
+                                    <li><a class="dropdown-item" href="#" wire:click="filterByStatus('{{ $key }}')">{{ $label }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div>  
+
+                            <div class="dropdown">
+                                <button class="btn btn-inverse btn-fw dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Phương thức thanh toán
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#" wire:click="$set('paymentMethod', null)">Tất cả</a></li>
+                                    <li><a class="dropdown-item" href="#" wire:click="$set('paymentMethod', 'cod')">Thanh toán khi nhận hàng</a></li>
+                                    <li><a class="dropdown-item" href="#" wire:click="$set('paymentMethod', 'vnpay')">Thanh toán VNPay</a></li>
+                                </ul>
+                            </div>  
+
+                            <div class="dropdown">
+                                <button class="btn btn-inverse btn-fw dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Đơn vị vận chuyển
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#" wire:click="$set('shippingMethod', null)">Tất cả</a></li>
+                                    @foreach($shippingMethods as $shippingMethod)
+                                    <li><a class="dropdown-item" href="#" wire:click="$set('shippingMethod', '{{ $shippingMethod->id }}')">{{ $shippingMethod->name }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div> 
+
                         </ul>
-                        <form class="d-flex">
+                        
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                   <span class="input-group-text"><i class="fa fa-search"></i></span>
                                 </div>
-                                <x-admin.input.text style="width: 400px" wire:model.live="search" placeholder="Tìm kiếm theo tên khách hàng, mã đơn hàng..."/>
-                              </div>
-                        </form>
+                                <x-admin.input.text style="width: 100px" wire:model.live="search" placeholder="Tìm kiếm theo ID đơn hàng, người mua..."/>
+                            </div>
+                        
                     </div>
                 </div>
               </nav>
+
+              <nav class="navbar navbar-expand-lg border border-1">
+                <div class="container-fluid">
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <div class="dropdown">
+                                <button class="btn btn-inverse btn-fw dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{ $cities[$selectedCity] ?? 'Tỉnh / Thành phố' }}
+                                </button>
+                                <ul class="dropdown-menu" style="max-height: 200px; overflow-y: auto;">
+                                    <li><a class="dropdown-item" href="#" wire:click="$set('selectedCity', null)">Tất cả</a></li>
+                                    @foreach($cities as $id => $name)
+                                    <li><a class="dropdown-item" href="#" wire:click="$set('selectedCity', '{{ $id }}')">{{ $name }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div> 
+
+                            <div class="dropdown">
+                                <button class="btn btn-inverse btn-fw dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{ $districts[$selectedDistrict] ?? 'Quận/Huyện' }}
+                                </button>
+                                <ul class="dropdown-menu" style="max-height: 200px; overflow-y: auto;">
+                                    <li><a class="dropdown-item" href="#" wire:click="$set('selectedDistrict', null)">Tất cả</a></li>
+                                    @foreach($districts as $id => $name)
+                                    <li><a class="dropdown-item" href="#" wire:click="$set('selectedDistrict', '{{ $id }}')">{{ $name }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div> 
+
+                            <div class="dropdown">
+                                <button class="btn btn-inverse btn-fw dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{ $wards[$selectedWard] ?? 'Phường/Xã' }}
+                                </button>
+                                <ul class="dropdown-menu" style="max-height: 200px; overflow-y: auto;">
+                                    <li><a class="dropdown-item" href="#" wire:click="$set('selectedWard', null)">Tất cả</a></li>
+                                    @foreach($wards as $id => $name)
+                                    <li><a class="dropdown-item" href="#" wire:click="$set('selectedWard', '{{ $id }}')">{{ $name }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div> 
+                        </ul>
+                        
+                    </div>
+                </div>
+              </nav>
+            
+            
    
     <!-- List -->
     <x-admin.table>
@@ -124,7 +197,7 @@
                 #
             </x-admin.table.heading>
             <x-admin.table.heading>Người mua</x-admin.table.heading>
-            <x-admin.table.heading>Tình trạng</x-admin.table.heading>
+            <x-admin.table.heading>Thông tin đơn hàng</x-admin.table.heading>
             <x-admin.table.heading
                 sortable
                 onSort="sortBy('total_price')" 
@@ -152,23 +225,48 @@
                     <p>{{ $order->user->email }}</p>
                 </x-admin.table.cell>
                 <x-admin.table.cell>
-                    @php
-                        $badgeClass = '';
-                        $badgeText = $order->getStatusString();
-                        if ($order->status == 'pending') {
-                            $badgeClass = 'badge-opacity-warning'; 
-                        } elseif ($order->status == 'shipped') {
-                            $badgeClass = 'badge-opacity-info';
-                        } elseif ($order->status == 'completed') {
-                            $badgeClass = 'badge-opacity-success'; 
-                        } elseif ($order->status == 'cancelled') {
-                            $badgeClass = 'badge-opacity-danger'; 
-                        }
-                    @endphp
-                    <label class="badge {{ $badgeClass }}" style="font-weight: bold">
-                        {{ $badgeText }}
-                    </label>
+                    <!-- Trạng thái -->
+                    <div>
+                        <strong>Trạng thái:</strong>
+                        @php
+                            $badgeClass = '';
+                            $badgeText = $order->getStatusString();
+                            if ($order->status == 'pending') {
+                                $badgeClass = 'badge-opacity-warning'; 
+                            } elseif ($order->status == 'shipped') {
+                                $badgeClass = 'badge-opacity-info';
+                            } elseif ($order->status == 'completed') {
+                                $badgeClass = 'badge-opacity-success'; 
+                            } elseif ($order->status == 'cancelled') {
+                                $badgeClass = 'badge-opacity-danger'; 
+                            }
+                        @endphp
+                        <label class="badge {{ $badgeClass }}" style="font-weight: bold">
+                            {{ $badgeText }}
+                        </label>
+                    </div>
+                
+                    <!-- Đơn vị vận chuyển -->
+                    <div style="margin-top: 8px; display: flex; align-items: center;">
+                        <strong style="margin-right: 8px;">Đơn vị vận chuyển:</strong>
+                        <div>{{ $order->shippingMethod->name }}</div>
+                    </div>
+                
+                    <!-- Hình thức thanh toán -->
+                    <div style="margin-top: 8px; display: flex; align-items: center;">
+                        <strong>Hình thức thanh toán:</strong>
+                        <div>
+                            @if($order->payment_method == 'vnpay')
+                                VNPay
+                            @elseif($order->payment_method == 'cod')
+                                Thanh toán khi nhận hàng
+                            @else
+                                {{ $order->payment_method }}
+                            @endif
+                        </div>
+                    </div>
                 </x-admin.table.cell>
+                
                 <x-admin.table.cell>
                     <h6 style="font-weight: bold">{{ formatVND($order->total_price) }}</h6>
                 </x-admin.table.cell>
@@ -207,18 +305,18 @@
                     <div style="display: flex; flex-direction: column; gap: 10px;">
                         <a wire:navigate href="{{ route('admin.order.detail', ['id' => $order->id ]) }}" 
                            type="button" style="font-weight: bold"
-                           class="btn btn-info btn-rounded btn-icon-text btn-sm">
+                           class="btn btn-primary btn-rounded btn-icon-text btn-sm">
                             Xem chi tiết
                             <i class="ti-eye btn-icon-append"></i>
                         </a>
                         
                         @if($order->status == 'cancelled')
-                        <button type="button" style="font-weight: bold"
+                        {{-- <button type="button" style="font-weight: bold"
                                 class="btn btn-danger btn-rounded btn-icon-text btn-sm"
                                 @click=" confirm('Bạn chắc chắn muốn xóa đơn hàng này?') ? $wire.deleteOrder({{ $order->id }}) : false">
                             Xóa 
                             <i class="ti-trash btn-icon-append"></i>
-                        </button>
+                        </button> --}}
                         @endif
                     </div>
                 </x-admin.table.cell>

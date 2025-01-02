@@ -50,14 +50,8 @@ class Order extends Model
         return $this->belongsTo(Discount::class, 'discount_id');
     }
 
-    // Mối quan hệ với bảng Log
-    public function logs()
-    {
-        return $this->hasMany(Log::class);
-    }
-
     // Mối quan hệ với bảng OrderStatusHistory
-    public function orderStatusHistory()
+    public function orderStatusHistories()
     {
         return $this->hasMany(OrderStatusHistory::class);
     }

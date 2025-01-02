@@ -36,7 +36,7 @@
     </div>
     
     <div class="card-body p-0">
-        <table class="table table-hover table-striped  mb-0">
+        <table class="table table-bordered">
             <thead class="bg-light">
                 <tr>                    
                     <th wire:click="sortBy('user_id')" style="cursor: pointer; width: 30%;">
@@ -94,6 +94,7 @@
     </div>
     <div class="card-footer d-flex justify-content-between align-items-center">
         <span class="text-muted">Hiển thị {{ $logs->firstItem() }} - {{ $logs->lastItem() }} của {{ $logs->total() }} mục</span>
-        {{ $logs->links() }}
+        {{ $logs->links('vendor.pagination.simple') }}
+
     </div>
 </div>

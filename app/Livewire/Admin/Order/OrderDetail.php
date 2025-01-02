@@ -13,7 +13,13 @@ class OrderDetail extends Component
 
     public function mount($id)
     {
-        $this->order = Order::findOrFail($id);
+        $this->order = Order::with([
+            'items', 
+            'orderStatusHistories' => function($query) {
+                $query->orderBy('changed_at');
+            }
+        ])
+        ->findOrFail($id);    
     }
 
    

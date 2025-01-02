@@ -5,6 +5,8 @@ namespace App\Livewire\Admin\Order;
 use App\Models\Log;
 use App\Models\Order;
 use App\Models\OrderStatusHistory;
+use App\Models\Setting;
+use App\Models\ShippingMethod;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Cache;
@@ -27,9 +29,63 @@ class OrderList extends Component
     public $sortDirection = 'desc'; 
     public $orderStatistics = [];
 
+    public $orderDateFrom;
+    public $orderDateTo;
+    public $paymentMethod;
+    public $shippingAddress;
+    public $shippingMethods;
+    public $shippingMethod;
+
+    public $selectedCity = null;
+    public $selectedDistrict = null;
+    public $selectedWard = null;
+    public $cities = [];
+    public $districts = [];
+    public $wards = [];
+
     public function mount()
     {
         $this->orderStatistics = $this->getOrderStatistics();
+        $this->shippingMethods = ShippingMethod::select(['id', 'name'])->get();
+        $this->cities = Setting::where('key', 'cities')
+        ->get()
+        ->map(function ($item) {
+            return [
+                'id' => json_decode($item->value, true)['id'], // Lấy ID từ JSON trong cột `value`
+                'name' => $item->name, // Lấy tên từ cột `name`
+            ];
+        })->pluck('name', 'id');    
+    }
+
+    public function updatedSelectedCity($cityId)
+    {
+        $this->districts = Setting::where('key', 'districts')
+        ->whereJsonContains('value->parent_id', $cityId)
+        ->get()
+        ->map(function ($item) {
+            return [
+                'id' => json_decode($item->value, true)['id'], // Lấy ID từ JSON trong cột `value`
+                'name' => $item->name, // Lấy tên từ cột `name`
+            ];
+        })
+        ->pluck('name', 'id');
+        $this->selectedDistrict = null;
+        $this->wards = [];
+    }
+
+    public function updatedSelectedDistrict($districtId)
+    {
+        $this->wards = Setting::where('key', 'wards')
+        ->whereJsonContains('value->parent_id', $districtId)
+        ->get()
+        ->map(function ($item) {
+            return [
+                'id' => json_decode($item->value, true)['id'], // Lấy ID từ JSON trong cột `value`
+                'name' => $item->name, // Lấy tên từ cột `name`
+            ];
+        })
+        ->pluck('name', 'id');
+        $this->selectedWard = null;
     }
 
     public function sortBy($field)
@@ -125,6 +181,26 @@ class OrderList extends Component
                       });
             })
             ->when($this->filterStatus, fn ($query) => $query->where('status', $this->filterStatus))
+            // Lọc theo ngày tạo đơn hàng
+            ->when($this->orderDateFrom, fn ($query) => $query->whereDate('created_at', '>=', $this->orderDateFrom))
+            ->when($this->orderDateTo, fn ($query) => $query->whereDate('created_at', '<=', $this->orderDateTo))
+            // Lọc theo phương thức thanh toán
+            ->when($this->paymentMethod, fn ($query) => $query->where('payment_method', $this->paymentMethod))
+            // Lọc theo địa chỉ giao hàng
+            ->when($this->shippingAddress, fn ($query) => $query->whereHas('userAddress', function ($userQuery) {
+                $userQuery->where('address', 'like', '%' . $this->shippingAddress . '%');
+            }))
+            // Lọc theo phương thức vận chuyển
+            ->when($this->shippingMethod, fn ($query) => $query->where('shipping_method_id', $this->shippingMethod))
+            ->when($this->selectedCity, fn ($query) => $query->whereHas('userAddress', function ($userQuery) {
+                $userQuery->where('city', $this->selectedCity);
+            }))
+            ->when($this->selectedDistrict, fn ($query) => $query->whereHas('userAddress', function ($userQuery) {
+                $userQuery->where('district', $this->selectedDistrict);
+            }))
+            ->when($this->selectedWard, fn ($query) => $query->whereHas('userAddress', function ($userQuery) {
+                $userQuery->where('ward', $this->selectedWard);
+            }))
             ->orderBy($this->sortField, $this->sortDirection)
             ->paginate(10);
 

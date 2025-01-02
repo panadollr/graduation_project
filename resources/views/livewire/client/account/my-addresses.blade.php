@@ -23,11 +23,8 @@
                     }
                 </style>
                 
-                <p class="address-paragraph">{{ $address['address'] }}</p>
                 <p class="address-paragraph">
-                    {{ collect($phuongList[$address['district']] ?? [])->firstWhere('id', $address['ward'])['full_name'] ?? 'Không xác định' }},
-                    {{ collect($quanList[$address['city']] ?? [])->firstWhere('id', $address['district'])['full_name'] ?? 'Không xác định' }},
-                    {{ collect($tinhList)->firstWhere('id', $address['city'])['full_name'] ?? 'Không xác định' }}
+                    {{ $address['address'] }}, {{ $address->ward_name}}, {{ $address->district_name}}, {{ $address->city_name }}
                 </p>
                   @if ($address['is_default'])
                     <span style="border: 2px solid #28a745; color: #28a745;" class="badge">Mặc định</span>
