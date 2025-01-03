@@ -76,13 +76,15 @@
                 </x-admin.table.cell>
                 <x-admin.table.cell>
                     <!-- Hiển thị vai trò bằng nhãn -->
-                    @if ($user->role === 'admin')
-                        <span class="badge badge-primary">Quản trị viên</span>
-                    @elseif ($user->role === 'employee')
-                        <span class="badge badge-success">Nhân viên</span>
-                    @elseif ($user->role === 'user')
-                        <span class="badge badge-secondary">Khách hàng</span>
-                    @endif
+                    <span class="badge {{ $user->getRoleBadgeClass() }}">
+                        @if ($user->role === 'admin')
+                            Quản trị viên
+                        @elseif ($user->role === 'employee')
+                            Nhân viên
+                        @elseif ($user->role === 'user')
+                            Khách hàng
+                        @endif
+                    </span>
                 </x-admin.table.cell>
                 <x-admin.table.cell>
                     {{ $user->created_at }}

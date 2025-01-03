@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Client;
 
+use App\Models\Log;
 use App\Models\ProductReview as ModelsProductReview;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -44,6 +45,7 @@ class ProductReview extends Component
         $this->rating = 0;
         $this->comment = '';
         $this->js("toastr.success('Đánh giá của bạn đã được gửi.')");
+        Log::logAction(auth()->id(), "Đã đánh giá cho sản phẩm #{$this->productId} !");
     }
 
     public function render()

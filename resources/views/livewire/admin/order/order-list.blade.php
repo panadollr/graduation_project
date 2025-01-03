@@ -277,17 +277,17 @@
 
         <div style="display: flex; flex-direction: column; gap: 10px;">
             @if($order->status == 'pending')
-                <button wire:click="confirmAction('{{ $order->id }}', 'cancelled')" 
-                    type="button" style="font-weight: bold"
-                    class="btn btn-danger btn-rounded btn-icon-text btn-sm">
-                    Hủy đơn
-                    <i class="ti-close btn-icon-append"></i>
-                </button>
                 <button wire:click="confirmAction('{{ $order->id }}', 'shipped')" 
                         type="button" style="font-weight: bold"
                         class="btn btn-success btn-rounded btn-icon-text btn-sm">
                     Duyệt đơn
                     <i class="ti-check btn-icon-append"></i>
+                </button>
+                <button wire:click="confirmAction('{{ $order->id }}', 'cancelled')" 
+                    type="button" style="font-weight: bold"
+                    class="btn btn-danger btn-rounded btn-icon-text btn-sm">
+                    Hủy đơn
+                    <i class="ti-close btn-icon-append"></i>
                 </button>
 
             @elseif($order->status == 'shipped')

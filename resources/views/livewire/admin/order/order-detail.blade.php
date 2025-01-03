@@ -189,7 +189,17 @@
                                             {{ $history->getStatusString(); }}
                                         </label>
                                         </div>
-                                        <div class="status-user">Thực hiện bởi: {{ $history->user->name ?? 'Hệ thống' }} ({{ $history->user->getRoleString()}})
+                                        <div class="status-user">Thực hiện bởi: <strong>{{ $history->user->name ?? 'Hệ thống' }} </strong>
+                                            <!-- Hiển thị vai trò bằng nhãn -->
+                                            <span class="badge {{ $history->user->getRoleBadgeClass() }}">
+                                                @if ($history->user->role === 'admin')
+                                                    Quản trị viên
+                                                @elseif ($history->user->role === 'employee')
+                                                    Nhân viên
+                                                @elseif ($history->user->role === 'user')
+                                                    Khách hàng
+                                                @endif
+                                            </span>
                                         </div>
                                         <div class="status-note">{{ $history->note ?? 'Không có ghi chú' }}</div>
                                     </div>

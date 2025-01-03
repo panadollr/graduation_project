@@ -72,4 +72,23 @@ class User extends Authenticatable
 
         return $roleDescriptions[$role] ?? 'Hệ thống';  // Trả về mặc định nếu không tìm thấy trạng thái
     }
+
+    /**
+     * Lấy lớp CSS của badge dựa trên vai trò người dùng.
+     *
+     * @return string
+     */
+    public function getRoleBadgeClass()
+    {
+        switch ($this->role) {
+            case 'admin':
+                return 'badge-success'; // màu xanh lá
+            case 'employee':
+                return 'badge-warning'; // màu vàng
+            case 'user':
+                return 'badge-primary'; // màu xanh nước biển
+            default:
+                return 'badge-secondary'; // mặc định (nếu có vai trò khác)
+        }
+    }
 }

@@ -7,7 +7,7 @@
         <div class="notifications-list" style="max-height: 430px; overflow-y: auto;">
             <div class="dropdown-item py-3 border-bottom">
                 <h6 class="mb-0 fw-medium float-start">Danh sách lịch sử hoạt động gần đây</h6>
-                <a href="{{ route('admin.log.index') }}" class="btn btn-primary btn-sm float-end" style="margin-left: 5px">Xem tất cả</a>
+                <a href="{{ route('admin.log.index') }}" class="btn btn-primary btn-sm float-end text-white" style="margin-left: 5px">Xem tất cả</a>
             </div>
             @forelse($logs as $log)
                 <a class="dropdown-item preview-item py-3">

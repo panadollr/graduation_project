@@ -69,7 +69,11 @@
                             @foreach($review->replies as $reply)
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     <div>
-                                        <span class="fw-bold">{{ $reply->user->name }}:</span> 
+                                        <span class="fw-bold">{{ $reply->user->name }}
+                                        @if ($reply->user->id === auth()->id())
+                                            (Bạn) :
+                                        @endif    
+                                        </span> 
                                         {{ $reply->comment }}
                                         <br>
                                         <small class="text-muted">{{ $reply->created_at }}</small>

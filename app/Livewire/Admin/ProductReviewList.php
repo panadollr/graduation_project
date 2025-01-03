@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin;
 
+use App\Models\Log;
 use App\Models\ProductReview;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -81,11 +82,12 @@ class ProductReviewList extends Component
 
         // Reset nội dung bình luận
         $this->replyComment = '';
+        Log::logAction(auth()->id(), "Đã phản hồi đánh giá của người dùng #{$newReply->user->email} !");
     }
 
     public function deleteReview($id)
     {
         ProductReview::findOrFail($id)->delete();
-        $this->js('showToast("Xóa đánh giá thành công !", "success")');
+        $this->js('showToast("Xóa đánh giá thành công !", "success")'); 
     }
 }

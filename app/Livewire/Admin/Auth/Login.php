@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Auth;
 
+use App\Models\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Livewire\Component;
@@ -38,8 +39,8 @@ class Login extends Component
                 'email' => $user->email,
                 'authenticated' => true
             ]);
-            // return redirect()->route('admin.dashboard');
-            return $this->redirect(route('admin.dashboard'), navigate: true);
+            Log::logAction(auth()->id(), 'Đã đăng nhập vào hệ thống !');
+            return $this->redirect(route('admin.dashboard'));
         } else {
             // Nếu thông tin không chính xác
             $this->isLoading = false;

@@ -2,17 +2,17 @@
     <div class="card-header d-flex justify-content-between align-items-center">
         <h5 class="mb-0">📜 Nhật ký hoạt động</h5>
         <div class="d-flex align-items-center gap-3">
-            <div style="border: 2px solid #1E3BB3; border-radius: 8px; padding: 10px; background-color: #f9f9f9;">
+            <div>
                 <label for="search" class="form-label mb-1 text-primary">Tìm kiếm hoạt động</label>
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" style="background-color: #007bff; color: white;"><i class="fa fa-search"></i></span>
+                        <span class="input-group-text" style="background-color: #1E3BB3; color: white;"><i class="fa fa-search"></i></span>
                     </div>
                     <input class="form-control me-2" type="text" style="width: 400px;" wire:model.live="search" placeholder="Nhập từ khóa...">
                 </div>
             </div>
             
-            <div style="border: 2px solid #1E3BB3; border-radius: 8px; padding: 10px; background-color: #f9f9f9;">
+            <div style="">
                 <label for="filterStartDate" class="form-label mb-1">Từ ngày</label>
                 <input 
                     type="date" 
@@ -22,7 +22,7 @@
                     style="max-width: 200px;"
                 >
             </div>
-            <div style="border: 2px solid #1E3BB3; border-radius: 8px; padding: 10px; background-color: #f9f9f9;">
+            <div>
                 <label for="filterEndDate" class="form-label mb-1">Đến ngày</label>
                 <input 
                     type="date" 
@@ -60,12 +60,14 @@
                         <td class="text-truncate" style="max-width: 200px;">
                             @if($log->user)
                                 <strong>{{ $log->user->name }}</strong>
-                                <span class="badge badge-sm 
-                                    {{ $log->user->role === 'admin' ? 'badge-primary' : 
-                                        ($log->user->role === 'employee' ? 'badge-success' : 'badge-secondary') }}" 
-                                    style="margin-left: 8px;">
-                                    {{ $log->user->role === 'user' ? 'Khách hàng' : 
-                                        ($log->user->role === 'admin' ? 'Quản trị viên' : 'Nhân viên') }}
+                                <span class="badge {{ $log->user->getRoleBadgeClass() }}">
+                                    @if ($log->user->role === 'admin')
+                                        Quản trị viên
+                                    @elseif ($log->user->role === 'employee')
+                                        Nhân viên
+                                    @elseif ($log->user->role === 'user')
+                                        Khách hàng
+                                    @endif
                                 </span>
                                 <br>
                                 <small class="text-muted">{{ $log->user->email }}</small>
