@@ -9,7 +9,7 @@
     
     <li class="nav-item nav-category">Quản lý</li>
 
-    <li class="nav-item {{ request()->routeIs('admin.product.index') || request()->routeIs('admin.product.create') || request()->routeIs('admin.product.edit') ? 'active' : '' }}">
+    <li class="nav-item {{ request()->routeIs('admin.product.index') || request()->routeIs('admin.product.create') || request()->routeIs('admin.product.edit') || request()->routeIs('admin.product.stock') ? 'active' : '' }}">
       <a class="nav-link" href="{{ route('admin.product.index') }}">
         <i class="menu-icon mdi mdi-package-variant-closed"></i>
         <span class="menu-title">Sản phẩm</span>

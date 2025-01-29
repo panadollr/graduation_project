@@ -4,9 +4,15 @@ namespace App\Livewire\Admin\Product;
 
 use App\Models\Category;
 use App\Models\Product;
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\Lazy;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+#[Title('Quản lý sản phẩm')] 
+#[Layout('admin.app')] 
+#[Lazy]
 class ProductList extends Component
 {
     use WithPagination;
@@ -55,6 +61,11 @@ class ProductList extends Component
         }
     }
 
+    // public function placeholder()
+    // {
+    //     return view('livewire.placeholders.placeholder');
+    // }
+
     public function render()
     {
         $categories = Category::with('childrens')->select('id', 'name', 'parent_id')->get();
@@ -80,8 +91,8 @@ class ProductList extends Component
         return view('livewire.admin.product.product-list', [
             'products' => $products,
             'categories' => $categories
-        ])
-        ->extends('admin.app')
-        ->layoutData(['title' => 'Quản lý sản phẩm']);
+        ]);
+        // ->extends('admin.app')
+        // ->layoutData(['title' => 'Quản lý sản phẩm']);
     }
 }

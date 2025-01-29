@@ -7,10 +7,14 @@
                         <h4 class="card-title">Danh sách người dùng</h4>
                     </li>
                 </ul>
+
+                @if(auth()->user()->role == 'admin')
                 <a href="{{ route('admin.user.create') }}" type="button" class="btn btn-primary btn-icon-text" >
                     <i class="ti-plus btn-icon-prepend"></i>
                     Thêm người dùng mới
                 </a>
+                @endif
+
             </div>
         </div>
       </nav>
@@ -90,6 +94,7 @@
                     {{ $user->created_at }}
                 </x-admin.table.cell>
                 <x-admin.table.cell>
+                    @if(auth()->user()->role == 'admin')
                     <button wire:navigate href="{{ route('admin.user.edit', $user->id )}}" type="button" class="btn btn-dark btn-rounded btn-icon-text btn-sm"> 
                         Sửa 
                     <i class="ti-file btn-icon-append"></i>
@@ -99,6 +104,7 @@
                         Xóa 
                         <i class="ti-trash btn-icon-append"></i>
                     </button>
+                    @endif
                 </x-admin.table.cell>
             </x-admin.table.row>
             @empty

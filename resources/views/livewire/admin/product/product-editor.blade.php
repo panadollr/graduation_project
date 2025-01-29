@@ -65,7 +65,7 @@
         </div>
     </div>   
 
-    <div class="col-md-4 grid-margin stretch-card">
+    <div class="col-md-4">
         <div class="card">
             <div class="card-body">
                 <form class="forms-sample" wire:submit.prevent="saveProduct">
@@ -80,11 +80,11 @@
                         @error('productData.category_id') <div class="text-danger">{{ $message }}</div> @enderror
                     </div>
 
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                             <label for="category">Số lượng nhập vào</label>
                             <input class="form-control @error('productData.quantity') is-invalid @enderror" type="number" wire:model="productData.quantity" min="0" step="1">
                             @error('productData.quantity') <div class="text-danger">{{ $message }}</div> @enderror
-                    </div>
+                    </div> --}}
 
                     <div x-data="{
                         basePrice: @entangle('productData.base_price'),

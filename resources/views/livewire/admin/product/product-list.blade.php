@@ -7,10 +7,14 @@
                         <h4 class="card-title">Danh sách sản phẩm</h4>
                     </li>
                 </ul>
+
+                @if(auth()->user()->role == 'admin')
                 <a href="{{ route('admin.product.create') }}" type="button" class="btn btn-primary btn-icon-text" >
                     <i class="ti-plus btn-icon-prepend"></i>
                     Thêm mới sản phẩm
                 </a>
+                @endif
+                
             </div>
         </div>
       </nav>
@@ -245,7 +249,8 @@
                 <x-admin.table.cell>
                     <a href="{{ route('admin.product.stock', ['id' => $product->id]) }}" type="button" class="btn btn-primary p-2">
                         Nhập kho
-                    </a>                    
+                    </a>        
+                    @if(auth()->user()->role == 'admin')            
                     <a href="{{ route('admin.product.edit', ['id' => $product->id]) }}" type="button" class="btn btn-dark btn-icon-text p-2"> 
                     Sửa<i class="fa fa-edit btn-icon-append"></i>
                     </a>
@@ -253,6 +258,7 @@
                     @click=" confirm('Bạn chắc chắn muốn xóa màu này?') ? $wire.delete({{ $product->id }}) : false">
                     Xóa<i class="fa fa-trash-o btn-icon-append"></i>
                     </button>
+                    @endif
                 </x-admin.table.cell>
             </x-admin.table.row>
             @empty

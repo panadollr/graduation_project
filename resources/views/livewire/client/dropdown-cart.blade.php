@@ -1,4 +1,4 @@
-<div class="dropdown cart-dropdown">
+<div class="dropdown cart-dropdown" wire:poll.1s="loadCart">
     <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
         <i class="icon-shopping-cart"></i>
         <span class="cart-count">{{ count($cartItems) }}</span>

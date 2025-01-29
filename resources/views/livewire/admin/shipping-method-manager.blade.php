@@ -7,6 +7,8 @@
                         <h4 class="card-title">Hình thức vận chuyển</h4>
                     </li>
                 </ul>
+
+                @if(auth()->user()->role == 'admin')
                 <button wire:click="create" type="button" class="btn btn-primary btn-icon-text" 
                                         wire:loading.attr="disabled" wire:loading.class="loading">
                                     <i class="ti-plus btn-icon-prepend" wire:loading.remove wire:target="create"></i>
@@ -16,6 +18,8 @@
                                         Đang mở...
                  </span>
                 </button>
+                @endif
+
             </div>
         </div>
       </nav>
@@ -88,6 +92,7 @@
                     {{ $method->created_at }}
                 </x-admin.table.cell>
                 <x-admin.table.cell>
+                    @if(auth()->user()->role == 'admin')
                     <button wire:click="edit({{ $method->id }})" type="button" class="btn btn-dark btn-rounded btn-icon-text btn-sm"> 
                         Sửa 
                     <i class="ti-file btn-icon-append"></i>
@@ -97,6 +102,7 @@
                         Xóa 
                         <i class="ti-trash btn-icon-append"></i>
                     </button>
+                    @endif
                 </x-admin.table.cell>
             </x-admin.table.row>
             @empty

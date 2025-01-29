@@ -19,7 +19,10 @@ class HomeController extends Controller
 
         // Lấy sản phẩm đang giảm giá
         $saleProducts = Product::where('discount_percentage', '>', 0)
-        ->with(['category', 'reviews'])
+        ->with(['category'])
+        ->withCount(['reviews' => function ($query) {
+            $query->whereNull('parent_id'); // Chỉ đếm các reviews có parent_id là null
+        }])
         ->orderByDesc('discount_percentage')
         ->take(10)
         ->get();

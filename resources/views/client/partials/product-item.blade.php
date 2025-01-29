@@ -42,7 +42,7 @@
                             <div class="ratings">
                                 <div class="ratings-val" style="width: {{ $product->reviews->avg('rating') * 20 }}%;"></div><!-- End .ratings-val -->
                             </div><!-- End .ratings -->
-                            <span class="ratings-text">( {{ count($product->reviews) }} Đánh giá )</span>
+                            <span class="ratings-text">( {{ $product->reviews_count }} Đánh giá )</span>
                         </div><!-- End .rating-container -->
                     </div><!-- End .product-body -->
                 </div><!-- End .product -->

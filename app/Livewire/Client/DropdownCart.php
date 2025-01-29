@@ -34,6 +34,7 @@ class DropdownCart extends Component
     {
         $cartItem = Cart::find($cartItemId);
         if ($cartItem && $cartItem->user_id == Auth::id()) {
+            $cartItem->product->releaseStock($cartItem->quantity); // Gọi hàm hoàn lại số lượng
             $cartItem->delete();
             $this->loadCart();
         }

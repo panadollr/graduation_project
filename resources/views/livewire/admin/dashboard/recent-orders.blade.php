@@ -3,9 +3,6 @@
                 <div class="d-sm-flex justify-content-between align-items-start">
                     <div>
                         <h4 class="card-title card-title-dash">Đơn hàng gần đây 
-                            <span class="card-subtitle card-subtitle-dash" style="font-size: 13px">
-                            (Bạn có {{ $orders->count() }} đơn hàng mới)
-                            </span>
                         </h4>
                     </div>
                 </div>

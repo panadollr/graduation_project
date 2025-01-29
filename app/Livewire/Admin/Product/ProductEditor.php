@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Log;
+use Illuminate\Support\Facades\Auth;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
@@ -37,7 +38,7 @@ class ProductEditor extends Component
             'productData.slug' => 'required|string|max:255|unique:products,slug,' . ($this->productId ?? 'NULL'),
             'productData.base_price' => 'required|numeric|min:1000',
             'productData.category_id' => 'required|exists:categories,id',
-            'productData.quantity' => 'required|numeric|min:1',
+            // 'productData.quantity' => 'required|numeric|min:1',
         ];
 
         if (!isset($this->productId)) {
@@ -78,9 +79,9 @@ class ProductEditor extends Component
             'productData.featured_image.required' => 'Ảnh đại diện sản phẩm là bắt buộc',
             'productData.featured_image.image' => 'Tệp tải lên phải là hình ảnh.',
 
-            'productData.quantity.required' => 'Số lượng sản phẩm là bắt buộc.',
-            'productData.quantity.numeric' => 'Số lượng sản phẩm phải là một số.',
-            'productData.quantity.min' => 'Số lượng sản phẩm phải lớn hơn 0.',
+            // 'productData.quantity.required' => 'Số lượng sản phẩm là bắt buộc.',
+            // 'productData.quantity.numeric' => 'Số lượng sản phẩm phải là một số.',
+            // 'productData.quantity.min' => 'Số lượng sản phẩm phải lớn hơn 0.',
         ];
     }
     
@@ -161,6 +162,11 @@ class ProductEditor extends Component
         $message = $this->productId 
         ? "Đã cập nhật sản phẩm có ID: $this->productId" 
         : "Đã thêm mới sản phẩm có ID: $product->id";
+
+        Log::logAction(Auth::id(), $this->productId 
+        ? "Đã cập nhật sản phẩm có ID: $this->productId" 
+        : "Đã thêm mới sản phẩm có ID: $product->id");
+
         session()->flash('success', $this->productId ? 'Cập nhật sản phẩm thành công' : 'Thêm sản phẩm thành công');
         return redirect()->route('admin.product.index');
     }

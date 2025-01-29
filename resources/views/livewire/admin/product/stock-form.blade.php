@@ -6,7 +6,8 @@
         <h5 class="mb-0">Nhập kho sản phẩm</h5>
     </div>
 
-    <div class="col-md-12 grid-margin stretch-card">
+    <div class="row">
+    <div class="col-md-6 grid-margin stretch-card">
     <div class="card">
     <div class="card-body">
     <form wire:submit.prevent="saveStock">
@@ -52,6 +53,54 @@
     </div>
     </div>
     </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Lần nhập kho gần nhất:</h4>
+                <p>Thời gian: {{ $product->stored_at ??  $product->created_at }}</p>
+            </div>
+            </div>
+
+        <div class="card mt-3">
+        <div class="card-body">
+            <h4 class="card-title">Lịch sử nhập kho</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Người thực hiện</th>
+                        <th>Số lượng nhập kho</th>
+                        <th>Thời gian</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($logs as $log)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $log->user->name }}
+                                <!-- Hiển thị vai trò bằng nhãn -->
+                                <span class="badge {{ $log->user->getRoleBadgeClass() }}">
+                                    @if ($log->user->role === 'admin')
+                                        Quản trị viên
+                                    @elseif ($log->user->role === 'employee')
+                                        Nhân viên
+                                    @elseif ($log->user->role === 'user')
+                                        Khách hàng
+                                    @endif
+                                </span>
+                            </td>
+                            <td>{{ $log->quantity_added }}</td>
+                            <td>{{ $log->created_at }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        </div>
+    </div>
+    </div>
+
 </div>
 
 

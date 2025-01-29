@@ -32,10 +32,14 @@ class AddToCartButton extends Component
     public function toggleCart()
     {
         $cartItem = Cart::updateOrCreate(
-            ['product_id' => $this->productId, 'user_id' => Auth::id()],
-            ['quantity' => 1]
+            ['product_id' => $this->productId, 'user_id' => Auth::id()]
         );
 
+        $cartItem->quantity = $cartItem->quantity + 1 ?? 1;
+        $cartItem->save();
+
+        $cartItem->product->reserveStock($cartItem->quantity); // Đặt trước sản phẩm trong kho
+        
         $this->isInCart = true;
         $this->js("toastr.success('Đã thêm sản phẩm vào giỏ hàng!')");
     }

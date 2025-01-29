@@ -28,7 +28,7 @@
 <body class="with-welcome-text">
 
     @include('layouts.toast')
-    @include('layouts.loading')
+    
     @if(request()->route()->getName() != 'admin.login')
     <div class="container-scroller">
         <!-- partial:partials/_navbar.html -->

@@ -80,9 +80,12 @@
                 </x-admin.table.cell>
                 <x-admin.table.cell>
                     <a class="btn btn-primary" href="{{ route('admin.blog.edit', $item->id) }}">Sửa</a>
+                    
+                    @if(auth()->user()->role == 'admin')
                     <button class="btn btn-danger" 
                         @click=" confirm('Bạn chắc chắn muốn bài viết này?') ? $wire.delete({{ $item->id }}) : false">Xóa
                     </button>
+                    @endif
                 </x-admin.table.cell>
             </x-admin.table.row>
             @empty

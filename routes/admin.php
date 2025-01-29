@@ -43,8 +43,8 @@ Route::group([
             Route::middleware('role:admin')->group(function () {
                 Route::get('create', ProductEditor::class)->name('create');
                 Route::get('edit/{id}', ProductEditor::class)->name('edit');
-                Route::get('stock/{id}', EditProductStock::class)->name('stock');
             });
+            Route::get('stock/{id}', EditProductStock::class)->name('stock');
         });
 
         // Quản lý danh mục
