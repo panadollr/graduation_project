@@ -56,14 +56,23 @@ class HomeController extends Controller
                 ->latest()
                 ->get();
 
-            return view($this->resourceDir . '.index', compact(
-                'sliders',
-                'categories',
-                'popularCategories',
-                'categoriesOfSaleProducts',
-                'blogs',
-                'saleProducts',
-            ));
+            // return view($this->resourceDir . '.index', compact(
+            //     'sliders',
+            //     'categories',
+            //     'popularCategories',
+            //     'categoriesOfSaleProducts',
+            //     'blogs',
+            //     'saleProducts',
+            // ));
+
+            return response()->json([
+                'sliders' => $sliders,
+                'categories' => $categories,
+                'popularCategories' => $popularCategories,
+                'categoriesOfSaleProducts' => $categoriesOfSaleProducts,
+                'blogs' => $blogs,
+                'saleProducts' => $saleProducts,
+            ]);
         } catch (\Exception $e) {
             // Xử lý lỗi nếu có
             return response()->json([
