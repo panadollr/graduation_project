@@ -14,64 +14,62 @@ class HomeController extends Controller
     public function index()
     {
         try {
-        $sliders = Slider::select(['image', 'link_url'])->get();
-        // $categories = Category::with([
-        //     'products' => function ($query) {
-        //         $query->with('reviews')
-        //             ->withCount(['reviews' => function ($query) {
-        //                 $query->whereNull('parent_id');
-        //             }]);
-        //     }
-        // ])
-        //     ->get();
+            $sliders = Slider::select(['image', 'link_url'])->get();
+            $categories = Category::with([
+                'products' => function ($query) {
+                    $query->with('reviews')
+                        ->withCount(['reviews' => function ($query) {
+                            $query->whereNull('parent_id');
+                        }]);
+                }
+            ])
+                ->get();
 
-        // $popularCategories = Category::with([
-        //     'products' => function ($query) {
-        //         $query->with('reviews')
-        //             ->withCount(['reviews' => function ($query) {
-        //                 $query->whereNull('parent_id');
-        //             }]);
-        //     }
-        // ])
-        //     ->whereNull('parent_id')
-        //     ->take(6)
-        //     ->get();
+            $popularCategories = Category::with([
+                'products' => function ($query) {
+                    $query->with('reviews')
+                        ->withCount(['reviews' => function ($query) {
+                            $query->whereNull('parent_id');
+                        }]);
+                }
+            ])
+                ->whereNull('parent_id')
+                ->take(6)
+                ->get();
 
-        // // Lấy sản phẩm đang giảm giá
-        // $saleProducts = Product::where('discount_percentage', '>', 0)
-        //     ->with(['category:id,name', 'reviews'])
-        //     ->withCount(['reviews as reviews_count' => function ($query) {
-        //         $query->whereNull('parent_id');
-        //     }])
-        //     ->orderByDesc('discount_percentage')
-        //     ->take(10)
-        //     ->get();
+            // Lấy sản phẩm đang giảm giá
+            $saleProducts = Product::where('discount_percentage', '>', 0)
+                ->with(['category:id,name', 'reviews'])
+                ->withCount(['reviews as reviews_count' => function ($query) {
+                    $query->whereNull('parent_id');
+                }])
+                ->orderByDesc('discount_percentage')
+                ->take(10)
+                ->get();
 
 
-        // $categoriesOfSaleProducts = $saleProducts->pluck('category')->unique();
+            $categoriesOfSaleProducts = $saleProducts->pluck('category')->unique();
 
-        // $blogs = Blog::select('title', 'slug', 'image', 'created_at', 'category_id')
-        //     ->with(['category:id,name'])
-        //     ->take(12)
-        //     ->latest()
-        //     ->get();
+            $blogs = Blog::select('title', 'slug', 'image', 'created_at', 'category_id')
+                ->with(['category:id,name'])
+                ->take(12)
+                ->latest()
+                ->get();
 
-        // return view($this->resourceDir . '.index', compact(
-        //     'sliders',
-        //     'categories',
-        //     'popularCategories',
-        //     'categoriesOfSaleProducts',
-        //     'blogs',
-        //     'saleProducts',
-        // ));
-
-        return $sliders;
+            return view($this->resourceDir . '.index', compact(
+                'sliders',
+                'categories',
+                'popularCategories',
+                'categoriesOfSaleProducts',
+                'blogs',
+                'saleProducts',
+            ));
         } catch (\Exception $e) {
-        // Xử lý lỗi nếu có
-        return response()->json([
-            'error' => 'Có lỗi xảy ra khi lấy dữ liệu.',
-            'message' => $e->getMessage()
-        ], 500);
-    }
+            // Xử lý lỗi nếu có
+            return response()->json([
+                'error' => 'Có lỗi xảy ra khi lấy dữ liệu.',
+                'message' => $e->getMessage()
+            ], 500);
+        }
     }
 }
