@@ -12,9 +12,9 @@
     <div class="mb-6"></div>
 
 
-    @foreach ($categories->take(3) as $category)
+    {{-- @foreach ($categories->take(3) as $category)
         @include('client.home.components.products-by-category', ['category' => $category])
-    @endforeach
+    @endforeach --}}
 
     <div class="mb-4"></div>
 
