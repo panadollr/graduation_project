@@ -3,33 +3,30 @@
 use Carbon\Carbon;
 
 /**
-     * Định dạng số thành tiền Việt Nam.
-     *
-     * @param float|int $amount
-     * @return string
-*/
+ * Định dạng số thành tiền Việt Nam.
+ *
+ * @param float|int $amount
+ * @return string
+ */
 if (! function_exists('formatVND')) {
     function formatVND($amount)
     {
-        $formatter = new NumberFormatter('vi_VN', NumberFormatter::CURRENCY);
-        return $formatter->formatCurrency($amount, 'VND');
+        return number_format($amount, 0, ',', '.') . ' ₫';
     }
-
 }
 
 /**
-     * Rút gọn chuỗi string.
-     *
-     * @param string $string
-     * @param int $limit
-     * @return string
-*/
+ * Rút gọn chuỗi string.
+ *
+ * @param string $string
+ * @param int $limit
+ * @return string
+ */
 if (! function_exists('limitString')) {
     function limitString($string, $limit)
     {
         return \Illuminate\Support\Str::limit($string, $limit);
     }
-
 }
 
 /**
@@ -43,13 +40,13 @@ if (! function_exists('formatTimestamp')) {
     {
         // Chuyển đổi timestamp sang Carbon instance
         $carbonInstance = Carbon::parse($timestamp);
-        
+
         // Trả về thời gian dạng "1 phút trước", "1 ngày trước", ...
         return $carbonInstance->diffForHumans();
     }
 }
 
-  
+
 /**
  * Hiển thị số điện thoại an toàn.
  *
@@ -107,4 +104,3 @@ if (! function_exists('calculateTotalPrice')) {
         }, 0);
     }
 }
-
