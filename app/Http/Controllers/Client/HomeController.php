@@ -13,6 +13,7 @@ class HomeController extends Controller
     protected $resourceDir = 'client.home';
     public function index()
     {
+        $haha = 'haha';
         $sliders = Slider::select(['image', 'link_url'])->get();
         $categories = Category::with([
             'products' => function ($query) {
