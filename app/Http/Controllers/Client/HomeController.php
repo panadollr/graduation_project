@@ -13,6 +13,7 @@ class HomeController extends Controller
     protected $resourceDir = 'client.home';
     public function index()
     {
+        try {
         $sliders = Slider::select(['image', 'link_url'])->get();
         // $categories = Category::with([
         //     'products' => function ($query) {
@@ -64,6 +65,13 @@ class HomeController extends Controller
         //     'saleProducts',
         // ));
 
-        return $slider;
+        return $sliders;
+        } catch (\Exception $e) {
+        // Xử lý lỗi nếu có
+        return response()->json([
+            'error' => 'Có lỗi xảy ra khi lấy dữ liệu.',
+            'message' => $e->getMessage()
+        ], 500);
+    }
     }
 }
