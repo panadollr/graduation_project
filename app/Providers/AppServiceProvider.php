@@ -26,10 +26,10 @@ class AppServiceProvider extends ServiceProvider
         Builder::macro('search', function ($field, $string) {
             return $string ? $this->where($field, 'like', '%' . $string . '%') : $this;
         });
-        
+
         View::composer('client.partials.header.header', function ($view) {
             $categories = Cache::remember('categories', now()->addHours(8), function () {
-                return Category::whereNull('parent_id')->get();
+                return Category::whereNull('parent_id')->select('name', 'slug')->get();
             });
             $view->with('categories', $categories);
         });

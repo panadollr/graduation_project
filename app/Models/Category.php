@@ -17,7 +17,7 @@ class Category extends Model
         'image',
         "parent_id",
         "type"
-      ];
+    ];
 
     // Mối quan hệ với danh mục cha
     public function parent()
@@ -26,22 +26,22 @@ class Category extends Model
     }
 
     public function ancestors()
-  {
-      $ancestors = collect();
-      $parent = $this->parent;
+    {
+        $ancestors = collect();
+        $parent = $this->parent;
 
-      while ($parent) {
-          $ancestors->prepend($parent);
-          $parent = $parent->parent;
-      }
+        while ($parent) {
+            $ancestors->prepend($parent);
+            $parent = $parent->parent;
+        }
 
-      return $ancestors;
-  }
-  
+        return $ancestors;
+    }
+
     // Mối quan hệ với các danh mục con
     public function childrens()
     {
-          return $this->hasMany(Category::class, 'parent_id')->with('childrens');
+        return $this->hasMany(Category::class, 'parent_id')->with('childrens');
     }
 
     public function getAllChildrenIds()
@@ -58,7 +58,7 @@ class Category extends Model
     // Hàm để lấy tất cả sản phẩm từ danh mục hiện tại và danh mục con
     public function allProducts()
     {
-        return Product::whereIn('category_id', $this->getAllChildrenIds());
+        return $this->products()->whereIn('category_id', $this->getAllChildrenIds());
     }
 
     public function products()
