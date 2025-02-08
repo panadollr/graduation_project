@@ -5,7 +5,6 @@ namespace App\Livewire\Client;
 use App\Models\Cart;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class AddToCartButton extends Component
 {
@@ -24,9 +23,14 @@ class AddToCartButton extends Component
 
     public function checkIfInCart()
     {
-        $query = Cart::where('product_id', $this->productId);
+        if (!Auth::check()) {
+            $this->isInCart = false;
+            return;
+        }
 
-        $this->isInCart = $query->where('user_id', Auth::id())->exists();
+        $this->isInCart = Cart::where('product_id', $this->productId)
+            ->where('user_id', Auth::id())
+            ->exists();
     }
 
     public function toggleCart()
@@ -39,9 +43,10 @@ class AddToCartButton extends Component
         $cartItem->save();
 
         $cartItem->product->reserveStock($cartItem->quantity); // Đặt trước sản phẩm trong kho
-        
+
         $this->isInCart = true;
         $this->js("toastr.success('Đã thêm sản phẩm vào giỏ hàng!')");
+        $this->dispatch('cartUpdated')->to(DropdownCart::class);;
     }
 
     public function render()

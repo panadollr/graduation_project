@@ -58,7 +58,7 @@ class Category extends Model
     // Hàm để lấy tất cả sản phẩm từ danh mục hiện tại và danh mục con
     public function allProducts()
     {
-        return $this->products()->whereIn('category_id', $this->getAllChildrenIds());
+        return Product::whereIn('category_id', $this->getAllChildrenIds());
     }
 
     public function products()

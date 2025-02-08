@@ -5,6 +5,7 @@ namespace App\Livewire\Client;
 use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Livewire\Attributes\On;
 
 class DropdownCart extends Component
 {
@@ -18,10 +19,11 @@ class DropdownCart extends Component
         }
     }
 
+    #[On('cartUpdated')]
     public function loadCart()
     {
         $this->cartItems = Cart::where('user_id', Auth::id())
-            ->with('product') 
+            ->with('product')
             ->get();
 
         $this->totalPrice = 0;
