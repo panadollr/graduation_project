@@ -22,9 +22,9 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/assets/js/select.dataTables.min.css') }}">
     <!-- End plugin css for this page -->
     <!-- inject:css -->
-    <link rel="stylesheet" href="{{ secure_asset('admin/assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/assets/css/style.css') }}">
     <!-- endinject -->
-    <link rel="shortcut icon" href="{{ secure_asset('client/assets/images/favicon.png') }}" />
+    <link rel="shortcut icon" href="{{ asset('client/assets/images/favicon.png') }}" />
     @livewireStyles
 </head>
 

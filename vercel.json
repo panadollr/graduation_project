@@ -5,38 +5,14 @@
         { "src": "/public/**", "use": "@vercel/static" }
     ],
      "routes": [
-     {
-        "src": "/style.css",
-        "dest": "/public/style.css"
-    },
-          {
-        "src": "/modalboxes.css",
-        "dest": "/public/modalboxes.css"
-    },
-     {
-        "src": "/plugins.css",
-        "dest": "/public/plugins.css"
-    },  
-    {
-        "src": "/contact.form.js",
-        "dest": "/public/contact.form.js"
-    },  
-    {
-        "src": "/init.js",
-        "dest": "/public/init.js"
-    }, 
-     {
-        "src": "/jquery.js",
-        "dest": "/public/jquery.js"
-    },  
-     {
-        "src": "/plugins.js",
-        "dest": "/public/plugins.js"
-    },  
-    {
-            "src": "/(.*)",
-            "dest": "/api/index.php"
-    }
+        {
+            "src": "/admin/(.*)",
+            "dest": "/public/admin/$1"
+        },
+        {
+                "src": "/(.*)",
+                "dest": "/api/index.php"
+        }
     ],
     "env": {
         "APP_NAME": "Vercel Laravel",
