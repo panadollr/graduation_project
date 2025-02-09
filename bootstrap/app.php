@@ -19,8 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
 
         $middleware->validateCsrfTokens(except: [
-            '/livewire/message/*',
-            'https://graduation-project-psi.vercel.app/*',
+            'stripe/*',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
