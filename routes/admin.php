@@ -36,7 +36,7 @@ Route::group([
     // Middleware admin
     Route::middleware(['auth', 'role:admin,employee'])->group(function () {
         // Dashboard
-        Route::get('dashboard', AdminDashboard::class)->name('dashboard');
+        // Route::get('dashboard', AdminDashboard::class)->name('dashboard');
 
         // Quản lý sản phẩm
         Route::prefix('product')->as('product.')->group(function () {
