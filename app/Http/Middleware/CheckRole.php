@@ -4,7 +4,6 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class CheckRole
@@ -21,7 +20,7 @@ class CheckRole
         if (!$user || !in_array($user->role, $roles)) {
             return redirect()->route('admin.login')->with('error', 'Bạn không có quyền truy cập');
         }
-    
+
         return $next($request);
     }
 }

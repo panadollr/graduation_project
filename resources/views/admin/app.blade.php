@@ -7,6 +7,7 @@
     <title>{{ $title ?? 'Admin' }}</title>
     <!-- Thêm CSS, meta tags, etc. -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="turbo-cache-control" content="no-cache">
     <link rel="stylesheet" href="{{ asset('admin/assets/vendors/feather/feather.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/vendors/mdi/css/materialdesignicons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/vendors/ti-icons/css/themify-icons.css') }}">

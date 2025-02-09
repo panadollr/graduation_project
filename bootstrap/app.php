@@ -17,6 +17,11 @@ return Application::configure(basePath: dirname(__DIR__))
             'user' => \App\Http\Middleware\UserMiddleware::class,
             'role' => \App\Http\Middleware\CheckRole::class,
         ]);
+
+        $middleware->validateCsrfTokens(except: [
+            '/livewire/message/*',
+            'https://graduation-project-psi.vercel.app/*',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
