@@ -23,6 +23,7 @@ Route::group([
     'prefix' => config('admin.route_prefix'),
     'as' => 'admin.',
 ], function () {
+    Route::get('dashboard', AdminDashboard::class)->name('dashboard');
     // Route cho login và home
     Route::get('/login', [AuthController::class, 'index'])->name('login');
     Route::get('/', function () {
@@ -52,7 +53,7 @@ Route::group([
 
         // Đơn vị
         Route::get('shipping-method', App\Livewire\Admin\ShippingMethodManager::class)->name('shipping-method.index');
-          
+
 
         // Đánh giá
         Route::get('review', App\Livewire\Admin\ProductReviewList::class)->name('review.index');
@@ -101,4 +102,3 @@ Route::group([
         });
     });
 });
-
