@@ -23,7 +23,6 @@ Route::group([
     'prefix' => config('admin.route_prefix'),
     'as' => 'admin.',
 ], function () {
-    Route::get('dashboard', AdminDashboard::class)->name('dashboard');
     // Route cho login và home
     Route::get('/login', [AuthController::class, 'index'])->name('login');
     Route::get('/', function () {
@@ -34,9 +33,9 @@ Route::group([
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
     // Middleware admin
-    Route::middleware(['auth', 'role:admin,employee'])->group(function () {
+    Route::middleware(['admin'])->group(function () {
         // Dashboard
-        // Route::get('dashboard', AdminDashboard::class)->name('dashboard');
+        Route::get('dashboard', AdminDashboard::class)->name('dashboard');
 
         // Quản lý sản phẩm
         Route::prefix('product')->as('product.')->group(function () {
