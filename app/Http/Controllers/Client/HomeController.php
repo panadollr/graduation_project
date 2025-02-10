@@ -36,15 +36,13 @@ class HomeController extends Controller
                 ->latest()
                 ->get();
 
-            // return view($this->resourceDir . '.index', compact(
-            //     'sliders',
-            //     'popularCategories',
-            //     'saleProducts',
-            //     'categoriesOfSaleProducts',
-            //     'blogs',
-            // ));
-
-            return view('client.home.index');
+            return view($this->resourceDir . '.index', compact(
+                'sliders',
+                'popularCategories',
+                'saleProducts',
+                'categoriesOfSaleProducts',
+                'blogs',
+            ));
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage(), 'ha' => 'ha']);
         }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,66 +8,66 @@
     <title>@yield('title', 'Lân Tech')</title>
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="{{ asset('client/assets/images/favicon.png') }}">
-    <link rel="stylesheet" href="{{ asset('client/assets/vendor/line-awesome/line-awesome/line-awesome/css/line-awesome.min.css')}}">
+    <link rel="stylesheet"
+        href="{{ asset('client/assets/vendor/line-awesome/line-awesome/line-awesome/css/line-awesome.min.css') }}">
     <!-- Plugins CSS File -->
-    <link rel="stylesheet" href="{{ asset('client/assets/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{ asset('client/assets/css/plugins/owl-carousel/owl.carousel.css')}}">
-    <link rel="stylesheet" href="{{ asset('client/assets/css/plugins/magnific-popup/magnific-popup.css')}}">
-    <link rel="stylesheet" href="{{ asset('client/assets/css/plugins/jquery.countdown.css')}}">
+    <link rel="stylesheet" href="{{ asset('client/assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/assets/css/plugins/owl-carousel/owl.carousel.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/assets/css/plugins/magnific-popup/magnific-popup.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/assets/css/plugins/jquery.countdown.css') }}">
     <!-- Main CSS File -->
-    <link rel="stylesheet" href="{{ asset('client/assets/css/style.css')}}">
-    <link rel="stylesheet" href="{{ asset('client/assets/css/skins/skin-demo-13.css')}}">
-    <link rel="stylesheet" href="{{ asset('client/assets/css/demos/demo-13.css')}}">
-    <link
-      rel="stylesheet"
-      href="{{ asset('client/assets/css/plugins/nouislider/nouislider.css') }}"
-    />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ asset('client/assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/assets/css/skins/skin-demo-13.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/assets/css/demos/demo-13.css') }}">
+    <link rel="stylesheet" href="{{ asset('client/assets/css/plugins/nouislider/nouislider.css') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Thêm Alpine.js từ CDN -->
-   <!-- Toastr CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+    <!-- Toastr CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 </head>
 
 <body>
     <style>
         .toast-message {
-          font-size: 15px;
+            font-size: 15px;
         }
-   
+
         /* Giá gốc (có gạch ngang) */
         .original-price {
-          text-decoration: line-through;
-          color: #999;
-          /* Màu xám nhạt */
-          margin-right: 8px;
-          /* Khoảng cách với giá sau giảm */
-          font-size: 1.05em;
-          /* Kích thước nhỏ hơn */
+            text-decoration: line-through;
+            color: #999;
+            /* Màu xám nhạt */
+            margin-right: 8px;
+            /* Khoảng cách với giá sau giảm */
+            font-size: 1.05em;
+            /* Kích thước nhỏ hơn */
         }
-   
+
         /* Giá sau giảm (nổi bật hơn) */
         .final-price {
-          color: #e60023;
-          /* Màu đỏ đậm */
-          font-weight: bold;
-          font-size: 1.05em;
+            color: #e60023;
+            /* Màu đỏ đậm */
+            font-weight: bold;
+            font-size: 1.05em;
         }
-   
+
         /* Giá bình thường (nếu không giảm) */
         .base-price {
-          font-size: 1.05em;
-          color: #000;
-          font-weight: bold;
+            font-size: 1.05em;
+            color: #000;
+            font-weight: bold;
         }
-      </style>
+    </style>
     @include('layouts.loading')
     <div class="page-wrapper">
-        @include('client.partials.header.header')
+        {{-- @include('client.partials.header.header') --}}
         <main class="main">
             @yield('content') <!-- Hiển thị nội dung chính -->
         </main><!-- End .main -->
 
-        @include('client.partials.footer')
+        {{-- @include('client.partials.footer') --}}
         <!-- End .footer -->
     </div><!-- End .page-wrapper -->
     <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
@@ -77,24 +78,28 @@
     <div class="mobile-menu-container">
         <div class="mobile-menu-wrapper">
             <span class="mobile-menu-close"><i class="icon-close"></i></span>
-            
+
             <form action="#" method="get" class="mobile-search">
                 <label for="mobile-search" class="sr-only">Search</label>
-                <input type="search" class="form-control" name="mobile-search" id="mobile-search" placeholder="Search in..." required>
+                <input type="search" class="form-control" name="mobile-search" id="mobile-search"
+                    placeholder="Search in..." required>
                 <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
             </form>
 
             <ul class="nav nav-pills-mobile nav-border-anim" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="mobile-menu-link" data-toggle="tab" href="#mobile-menu-tab" role="tab" aria-controls="mobile-menu-tab" aria-selected="true">Menu</a>
+                    <a class="nav-link active" id="mobile-menu-link" data-toggle="tab" href="#mobile-menu-tab"
+                        role="tab" aria-controls="mobile-menu-tab" aria-selected="true">Menu</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="mobile-cats-link" data-toggle="tab" href="#mobile-cats-tab" role="tab" aria-controls="mobile-cats-tab" aria-selected="false">Categories</a>
+                    <a class="nav-link" id="mobile-cats-link" data-toggle="tab" href="#mobile-cats-tab" role="tab"
+                        aria-controls="mobile-cats-tab" aria-selected="false">Categories</a>
                 </li>
             </ul>
 
             <div class="tab-content">
-                <div class="tab-pane fade show active" id="mobile-menu-tab" role="tabpanel" aria-labelledby="mobile-menu-link">
+                <div class="tab-pane fade show active" id="mobile-menu-tab" role="tabpanel"
+                    aria-labelledby="mobile-menu-link">
                     <nav class="mobile-nav">
                         <ul class="mobile-menu">
                             <li class="active">
@@ -134,10 +139,12 @@
                                     <li><a href="category-2cols.html">Shop Grid 2 Columns</a></li>
                                     <li><a href="category.html">Shop Grid 3 Columns</a></li>
                                     <li><a href="category-4cols.html">Shop Grid 4 Columns</a></li>
-                                    <li><a href="category-boxed.html"><span>Shop Boxed No Sidebar<span class="tip tip-hot">Hot</span></span></a></li>
+                                    <li><a href="category-boxed.html"><span>Shop Boxed No Sidebar<span
+                                                    class="tip tip-hot">Hot</span></span></a></li>
                                     <li><a href="category-fullwidth.html">Shop Fullwidth No Sidebar</a></li>
                                     <li><a href="product-category-boxed.html">Product Category Boxed</a></li>
-                                    <li><a href="product-category-fullwidth.html"><span>Product Category Fullwidth<span class="tip tip-new">New</span></span></a></li>
+                                    <li><a href="product-category-fullwidth.html"><span>Product Category Fullwidth<span
+                                                    class="tip tip-new">New</span></span></a></li>
                                     <li><a href="cart.html">Cart</a></li>
                                     <li><a href="checkout.html">Checkout</a></li>
                                     <li><a href="wishlist.html">Wishlist</a></li>
@@ -149,7 +156,8 @@
                                 <ul>
                                     <li><a href="product.html">Default</a></li>
                                     <li><a href="product-centered.html">Centered</a></li>
-                                    <li><a href="product-extended.html"><span>Extended Info<span class="tip tip-new">New</span></span></a></li>
+                                    <li><a href="product-extended.html"><span>Extended Info<span
+                                                    class="tip tip-new">New</span></span></a></li>
                                     <li><a href="product-gallery.html">Gallery</a></li>
                                     <li><a href="product-sticky.html">Sticky Info</a></li>
                                     <li><a href="product-sidebar.html">Boxed With Sidebar</a></li>
@@ -265,10 +273,14 @@
             </div><!-- End .tab-content -->
 
             <div class="social-icons">
-                <a href="#" class="social-icon" target="_blank" title="Facebook"><i class="icon-facebook-f"></i></a>
-                <a href="#" class="social-icon" target="_blank" title="Twitter"><i class="icon-twitter"></i></a>
-                <a href="#" class="social-icon" target="_blank" title="Instagram"><i class="icon-instagram"></i></a>
-                <a href="#" class="social-icon" target="_blank" title="Youtube"><i class="icon-youtube"></i></a>
+                <a href="#" class="social-icon" target="_blank" title="Facebook"><i
+                        class="icon-facebook-f"></i></a>
+                <a href="#" class="social-icon" target="_blank" title="Twitter"><i
+                        class="icon-twitter"></i></a>
+                <a href="#" class="social-icon" target="_blank" title="Instagram"><i
+                        class="icon-instagram"></i></a>
+                <a href="#" class="social-icon" target="_blank" title="Youtube"><i
+                        class="icon-youtube"></i></a>
             </div><!-- End .social-icons -->
         </div><!-- End .mobile-menu-wrapper -->
     </div><!-- End .mobile-menu-container -->
@@ -282,12 +294,15 @@
                 <div class="row no-gutters bg-white newsletter-popup-content">
                     <div class="col-xl-3-5col col-lg-7 banner-content-wrap">
                         <div class="banner-content text-center">
-                            <img src="assets/images/popup/newsletter/logo.png" class="logo" alt="logo" width="60" height="15">
+                            <img src="assets/images/popup/newsletter/logo.png" class="logo" alt="logo"
+                                width="60" height="15">
                             <h2 class="banner-title">get <span>25<light>%</light></span> off</h2>
-                            <p>Subscribe to the Molla eCommerce newsletter to receive timely updates from your favorite products.</p>
+                            <p>Subscribe to the Molla eCommerce newsletter to receive timely updates from your favorite
+                                products.</p>
                             <form action="#">
                                 <div class="input-group input-group-round">
-                                    <input type="email" class="form-control form-control-white" placeholder="Your Email Address" aria-label="Email Adress" required>
+                                    <input type="email" class="form-control form-control-white"
+                                        placeholder="Your Email Address" aria-label="Email Adress" required>
                                     <div class="input-group-append">
                                         <button class="btn" type="submit"><span>go</span></button>
                                     </div><!-- .End .input-group-append -->
@@ -295,7 +310,8 @@
                             </form>
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="register-policy-2" required>
-                                <label class="custom-control-label" for="register-policy-2">Do not show this popup again</label>
+                                <label class="custom-control-label" for="register-policy-2">Do not show this popup
+                                    again</label>
                             </div><!-- End .custom-checkbox -->
                         </div>
                     </div>
@@ -307,32 +323,33 @@
         </div>
     </div>
     <!-- Plugins JS File -->
-    <script src="{{ asset('client/assets/js/jquery.min.js')}}"></script>
-    <script src="{{ asset('client/assets/js/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{ asset('client/assets/js/jquery.hoverIntent.min.js')}}"></script>
-    <script src="{{ asset('client/assets/js/jquery.waypoints.min.js')}}"></script>
-    <script src="{{ asset('client/assets/js/superfish.min.js')}}"></script>
-    <script src="{{ asset('client/assets/js/owl.carousel.min.js')}}"></script>
-   
-    <script src="{{ asset('client/assets/js/bootstrap-input-spinner.js')}}"></script>
-    <script src="{{ asset('client/assets/js/jquery.elevateZoom.min.js')}}"></script>
-    <script src="{{ asset('client/assets/js/jquery.plugin.min.js')}}"></script>
-    <script src="{{ asset('client/assets/js/jquery.countdown.min.js')}}"></script>
+    <script src="{{ asset('client/assets/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('client/assets/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('client/assets/js/jquery.hoverIntent.min.js') }}"></script>
+    <script src="{{ asset('client/assets/js/jquery.waypoints.min.js') }}"></script>
+    <script src="{{ asset('client/assets/js/superfish.min.js') }}"></script>
+    <script src="{{ asset('client/assets/js/owl.carousel.min.js') }}"></script>
+
+    <script src="{{ asset('client/assets/js/bootstrap-input-spinner.js') }}"></script>
+    <script src="{{ asset('client/assets/js/jquery.elevateZoom.min.js') }}"></script>
+    <script src="{{ asset('client/assets/js/jquery.plugin.min.js') }}"></script>
+    <script src="{{ asset('client/assets/js/jquery.countdown.min.js') }}"></script>
     <script src="{{ asset('client/assets/js/nouislider.min.js') }}"></script>
     <script src="{{ asset('client/assets/js/wNumb.js') }}"></script>
     <!-- Main JS File -->
-    <script src="{{ asset('client/assets/js/main.js')}}"></script>
-    <script src="{{ asset('client/assets/js/demos/demo-3.js')}}"></script>
+    <script src="{{ asset('client/assets/js/main.js') }}"></script>
+    <script src="{{ asset('client/assets/js/demos/demo-3.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" async></script>
     <!-- Toastr JS -->
     <script script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    
-  <!---Start TaggoAI--->
-  <script async data-taggo-botid="675b0a15cb02892baf367332" src="https://widget.taggo.chat/v2.js"></script>
-  <!---End TaggoAI--->
+
+    <!---Start TaggoAI--->
+    <script async data-taggo-botid="675b0a15cb02892baf367332" src="https://widget.taggo.chat/v2.js"></script>
+    <!---End TaggoAI--->
 </body>
 
 @yield('script')
 
 <!-- molla/index-3.html  22 Nov 2019 09:55:58 GMT -->
+
 </html>
