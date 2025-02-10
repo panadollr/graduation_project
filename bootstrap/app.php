@@ -18,6 +18,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'role' => \App\Http\Middleware\CheckRole::class,
         ]);
 
+        $middleware->append(\App\Http\Middleware\ReadOnlyDatabase::class,);
+
         $middleware->validateCsrfTokens(except: [
             'stripe/*',
         ]);

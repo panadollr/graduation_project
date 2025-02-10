@@ -12,7 +12,6 @@ use App\Livewire\Admin\Discount\DiscountEditor;
 use App\Livewire\Admin\Discount\DiscountList;
 use App\Livewire\Admin\Order\OrderDetail;
 use App\Livewire\Admin\Order\OrderList;
-use App\Livewire\Admin\OrderManager;
 use App\Livewire\Admin\Product\EditProductStock;
 use App\Livewire\Admin\Product\ProductEditor;
 use App\Livewire\Admin\Product\ProductList;
