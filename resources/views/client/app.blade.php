@@ -78,7 +78,7 @@
                         </a>
 
                         <div>
-
+                            @include('client.partials.header.category-dropdown')
                         </div>
 
                         {{-- @livewire('client.chatbot') --}}
