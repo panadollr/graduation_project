@@ -44,13 +44,7 @@ class HomeController extends Controller
             //     'blogs',
             // ));
 
-            return response()->json([
-                'sliders' => $sliders,
-                'popularCategories' => $popularCategories,
-                'saleProducts' => $saleProducts,
-                'categoriesOfSaleProducts' => $categoriesOfSaleProducts,
-                'blogs' => $blogs,
-            ]);
+            return view('client.home.index');
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage(), 'ha' => 'ha']);
         }
