@@ -16,11 +16,13 @@
                     @include('client.partials.header.category-dropdown')
                 </div>
 
+                {{-- @livewire('client.chatbot') --}}
+
             </div><!-- End .header-left -->
 
 
             <div class="header-center">
-
+                @livewire('client.product-search')
             </div>
 
             <div class="header-right">
@@ -41,7 +43,7 @@
                 </div>
 
                 <div class="header-dropdown-link">
-
+                    <livewire:client.dropdown-cart />
 
                 </div>
             </div><!-- End .header-right -->
