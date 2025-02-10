@@ -26,17 +26,7 @@
             <div class="header-right">
 
                 <div class="account">
-                    <a
-                        @auth href="{{ route('account.index') }}" title="Tài khoản"
-                       @else
-                       href="#signin-modal" data-toggle="modal" @endauth>
-                        <div class="icon">
-                            <i class="icon-user"></i>
-                        </div>
-                        <p style='font-family: sans-serif;'>@auth Tài khoản của tôi
-                            @else
-                            Đăng nhập @endauth
-                        </p>
+                    <a </p>
                     </a>
                 </div>
 
