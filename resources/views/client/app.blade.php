@@ -62,7 +62,7 @@
     </style>
     @include('layouts.loading')
     <div class="page-wrapper">
-        {{-- @include('client.partials.header.header') --}}
+        @include('client.partials.header.header')
         <main class="main">
             @yield('content') <!-- Hiển thị nội dung chính -->
         </main><!-- End .main -->
