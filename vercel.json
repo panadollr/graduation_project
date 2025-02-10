@@ -10,8 +10,8 @@
             "dest": "/public/admin/$1"
         },
         {
-                "src": "/(.*)",
-                "dest": "/api/index.php"
+            "src": "/(.*)",
+            "dest": "/api/index.php"
         }
     ],
     "env": {
