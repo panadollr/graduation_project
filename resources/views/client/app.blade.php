@@ -62,12 +62,12 @@
     </style>
     @include('layouts.loading')
     <div class="page-wrapper">
-        @include('client.partials.header.header')
+        {{-- @include('client.partials.header.header') --}}
         <main class="main">
             @yield('content') <!-- Hiển thị nội dung chính -->
         </main><!-- End .main -->
 
-        {{-- @include('client.partials.footer') --}}
+        @include('client.partials.footer')
         <!-- End .footer -->
     </div><!-- End .page-wrapper -->
     <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
