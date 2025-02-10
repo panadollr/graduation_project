@@ -13,34 +13,38 @@ class HomeController extends Controller
     protected $resourceDir = 'client.home';
     public function index()
     {
-        $sliders = Slider::select(['image', 'link_url'])->take(10)->get();
+        try {
+            $sliders = Slider::select(['image', 'link_url'])->take(10)->get();
 
-        $popularCategories = Category::take(6)->get();
+            $popularCategories = Category::take(6)->get();
 
-        // Lấy sản phẩm đang giảm giá
-        $saleProducts = Product::where('discount_percentage', '>', 0)
-            ->with(['category:id,name', 'reviews'])
-            ->withCount(['reviews as reviews_count' => function ($query) {
-                $query->whereNull('parent_id');
-            }])
-            ->orderByDesc('discount_percentage')
-            ->take(10)
-            ->get();
+            // Lấy sản phẩm đang giảm giá
+            $saleProducts = Product::where('discount_percentage', '>', 0)
+                ->with(['category:id,name', 'reviews'])
+                ->withCount(['reviews as reviews_count' => function ($query) {
+                    $query->whereNull('parent_id');
+                }])
+                ->orderByDesc('discount_percentage')
+                ->take(10)
+                ->get();
 
-        $categoriesOfSaleProducts = $saleProducts->pluck('category')->unique();
+            $categoriesOfSaleProducts = $saleProducts->pluck('category')->unique();
 
-        $blogs = Blog::select('title', 'slug', 'image', 'created_at', 'category_id')
-            ->with(['category:id,name'])
-            ->take(12)
-            ->latest()
-            ->get();
+            $blogs = Blog::select('title', 'slug', 'image', 'created_at', 'category_id')
+                ->with(['category:id,name'])
+                ->take(12)
+                ->latest()
+                ->get();
 
-        return view($this->resourceDir . '.index', compact(
-            'sliders',
-            'popularCategories',
-            'saleProducts',
-            'categoriesOfSaleProducts',
-            'blogs',
-        ));
+            return view($this->resourceDir . '.index', compact(
+                'sliders',
+                'popularCategories',
+                'saleProducts',
+                'categoriesOfSaleProducts',
+                'blogs',
+            ));
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 500);
+        }
     }
 }
