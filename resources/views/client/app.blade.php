@@ -78,6 +78,7 @@
                         </a>
 
                         <div>
+
                         </div>
 
                         {{-- @livewire('client.chatbot') --}}
@@ -86,7 +87,7 @@
 
 
                     <div class="header-center">
-                        @livewire('client.product-search')
+
                     </div>
 
                     <div class="header-right">
