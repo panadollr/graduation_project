@@ -44,7 +44,7 @@ class HomeController extends Controller
                 'blogs',
             ));
         } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage(), 'ha' => 'ha'], 500);
+            return response()->json(['message' => $e->getMessage(), 'ha' => 'ha']);
         }
     }
 }
