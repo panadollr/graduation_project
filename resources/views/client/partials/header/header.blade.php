@@ -13,14 +13,14 @@
                 </a>
 
                 <div>
-                    @include('client.partials.header.category-dropdown')
+                    {{-- @include('client.partials.header.category-dropdown') --}}
                 </div>
 
             </div><!-- End .header-left -->
 
 
             <div class="header-center">
-                @livewire('client.product-search')
+                {{-- @livewire('client.product-search') --}}
             </div>
 
             <div class="header-right">
@@ -41,7 +41,7 @@
                 </div>
 
                 <div class="header-dropdown-link">
-                    <livewire:client.dropdown-cart />
+                    {{-- <livewire:client.dropdown-cart /> --}}
 
                 </div>
             </div><!-- End .header-right -->
