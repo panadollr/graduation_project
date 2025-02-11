@@ -21,7 +21,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->append(\App\Http\Middleware\ReadOnlyDatabase::class,);
 
         $middleware->validateCsrfTokens(except: [
-            'stripe/*',
+            'livewire/*',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
