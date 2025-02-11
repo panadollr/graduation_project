@@ -50,9 +50,6 @@ class Login extends Component
             // Nếu thất bại, hiển thị thông báo lỗi
             $this->js("toastr.error('Thông tin đăng nhập không chính xác')");
         } catch (\Exception $e) {
-            // Ghi log lỗi vào hệ thống
-            Log::error('Lỗi đăng nhập: ' . $e->getMessage());
-
             // Hiển thị thông báo lỗi ra giao diện với chi tiết thông báo lỗi
             $this->js("toastr.error('Lỗi: " . addslashes($e->getMessage()) . "')");
         }
