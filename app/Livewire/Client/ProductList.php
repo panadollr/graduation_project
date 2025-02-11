@@ -20,7 +20,7 @@ class ProductList extends Component
     public $category;
     public $search;
 
-    public $selectedSort= 'sale';
+    public $selectedSort = 'sale';
     public $sortOptions = [
         'discount_rate' => 'Giảm giá mạnh',
         'rating' => 'Đánh giá cao',
@@ -28,9 +28,9 @@ class ProductList extends Component
         'high_price' => 'Giá: Cao đến thấp',
         'low_price' => 'Giá: Thấp đến cao',
     ];
-    
 
-    public $selectedPrice = null; 
+
+    public $selectedPrice = null;
     public $priceRanges = [
         'under_2m' => 'Dưới 2 triệu',
         '2m_4m' => 'Từ 2 triệu đến 4 triệu',
@@ -39,6 +39,10 @@ class ProductList extends Component
         '7m_13m' => 'Từ 7 triệu đến 13 triệu',
         '13m_20m' => 'Từ 13 triệu đến 20 triệu',
         'above_20m' => 'Trên 20 triệu'
+    ];
+
+    protected $middleware = [
+        \App\Http\Middleware\ReadOnlyDatabase::class,
     ];
 
     public function mount($category_slug)
@@ -50,7 +54,7 @@ class ProductList extends Component
         $this->title = $this->category
             ? $this->category->name . ' - Danh sách sản phẩm'
             : ($this->search ? "Tìm kiếm: '{$this->search}' - Danh sách sản phẩm" : 'Sản phẩm - Danh sách');
-        
+
         $childrenIds = $this->category ? $this->category->getAllChildrenIds() : [];
         $this->defaultMinPrice = Product::whereIn('category_id', $childrenIds)->min('base_price') ?? 100000;
         $this->defaultMaxPrice = Product::whereIn('category_id', $childrenIds)->max('base_price') ?? 20000000;
@@ -102,7 +106,7 @@ class ProductList extends Component
         if ($this->search) {
             $query->where(function ($q) {
                 $q->where('name', 'like', '%' . $this->search . '%')
-                  ->orWhere('description', 'like', '%' . $this->search . '%');
+                    ->orWhere('description', 'like', '%' . $this->search . '%');
             });
         }
 
@@ -128,7 +132,7 @@ class ProductList extends Component
                     break;
             }
         });
-        
+
 
         $query->when($this->selectedSort, function ($q) {
             switch ($this->selectedSort) {
@@ -137,7 +141,7 @@ class ProductList extends Component
                     break;
                 case 'rating':
                     $q->withAvg('reviews', 'rating') // Tính giá trị trung bình cột rating
-                      ->orderByDesc('reviews_avg_rating'); // Sắp xếp giảm dần
+                        ->orderByDesc('reviews_avg_rating'); // Sắp xếp giảm dần
                     break;
                 case 'high_price':
                     $q->orderByDesc('sale_price');
@@ -150,9 +154,9 @@ class ProductList extends Component
                     break;
             }
         });
-        
+
         $products = $query->whereBetween('sale_price', [$this->minPrice, $this->maxPrice])
-                          ->paginate(10);
+            ->paginate(10);
 
         return view('client.list.livewire.product-list', [
             'products' => $products,
@@ -161,4 +165,3 @@ class ProductList extends Component
         ]);
     }
 }
-

@@ -11,8 +11,6 @@ use App\Models\OrderItem;
 use App\Models\OrderStatusHistory;
 use App\Models\Product;
 use App\Services\VNPayService;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
@@ -40,12 +38,19 @@ class CheckoutForm extends Component
         $defaultAddress = $addresses->firstWhere('is_default', true);
         $this->selectedAddress = $defaultAddress ? $defaultAddress->id : null;
         $this->discounts = Discount::where('status', true)
-        ->where('end_date', '>', now())
-        ->get();
+            ->where('end_date', '>', now())
+            ->get();
         $this->updateTotal();
     }
 
-    public function updatedSelectedShipping() { $this->updateTotal(); }
+    protected $middleware = [
+        \App\Http\Middleware\ReadOnlyDatabase::class,
+    ];
+
+    public function updatedSelectedShipping()
+    {
+        $this->updateTotal();
+    }
 
     private function updateTotal()
     {
@@ -54,7 +59,7 @@ class CheckoutForm extends Component
             return $product['sale_price'] * $product['quantity'];
         }) + $shippingPrice;
         $this->estimatedTotal = $this->subTotal;
-    
+
         // Nếu đã áp dụng mã giảm giá, tính lại estimatedTotal
         if ($this->appliedDiscount) {
             $discountValue = $this->subTotal * ($this->appliedDiscount->discount_value / 100);
@@ -89,9 +94,9 @@ class CheckoutForm extends Component
 
         // Lưu mã giảm giá đã áp dụng
         $this->appliedDiscount = $discount;
-        
+
         // Tính lại tổng tiền ước tính với giảm giá
-        $discountValue =  $this->subTotal * ($this->appliedDiscount->discount_value / 100) ;
+        $discountValue =  $this->subTotal * ($this->appliedDiscount->discount_value / 100);
         $this->estimatedTotal = $this->subTotal - $discountValue;
 
         $this->js("toastr.success('Áp dụng mã giảm giá thành công!')");
@@ -103,7 +108,7 @@ class CheckoutForm extends Component
             $this->js("toastr.error('Bạn cần thêm ít nhất một địa chỉ để thanh toán!')");
             return;
         }
-        
+
         $this->selectedPaymentMethod = $paymentMethod;
         $this->validateOrderData();
 
@@ -220,7 +225,7 @@ class CheckoutForm extends Component
         $shippingMethod = $this->shippingMethods->firstWhere('id', $this->selectedShipping);
         $shippingFee = $shippingMethod ? $shippingMethod->price : 0;
         $discountValue = $this->appliedDiscount ? ($this->subTotal * ($this->appliedDiscount->discount_value / 100)) : 0;
-    
+
         $dataMail = [
             'title' => 'Bạn đã xác nhận đơn hàng',
             'message' => 'Cảm ơn bạn đã đặt hàng tại cửa hàng của chúng tôi!',
