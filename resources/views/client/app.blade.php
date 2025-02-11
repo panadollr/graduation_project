@@ -78,7 +78,7 @@
                         </a>
 
                         <div>
-                            @include('client.partials.header.category-dropdown')
+
                         </div>
 
                         {{-- @livewire('client.chatbot') --}}
@@ -87,7 +87,7 @@
 
 
                     <div class="header-center">
-
+                        @livewire('client.product-search')
                     </div>
 
                     <div class="header-right">
