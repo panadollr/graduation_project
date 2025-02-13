@@ -24,25 +24,26 @@ class AddToCartAndBuyNow extends Component
     {
         // Kiểm tra xem sản phẩm đã có trong giỏ hay chưa
         $cartItem = Cart::where('product_id', $this->productId)
-        ->where('user_id', Auth::id())
-        ->first();
+            ->where('user_id', Auth::id())
+            ->first();
 
         if ($cartItem) {
-        // Nếu sản phẩm đã có trong giỏ, tăng số lượng lên theo số lượng mới
-        $cartItem->update([
-        'quantity' => $cartItem->quantity + $this->quantity
-        ]);
+            // Nếu sản phẩm đã có trong giỏ, tăng số lượng lên theo số lượng mới
+            $cartItem->update([
+                'quantity' => $cartItem->quantity + $this->quantity
+            ]);
         } else {
-        // Nếu sản phẩm chưa có trong giỏ, tạo mới giỏ hàng
-        Cart::create([
-        'product_id' => $this->productId,
-        'user_id' => Auth::id(),
-        'quantity' => $this->quantity
-        ]);
+            // Nếu sản phẩm chưa có trong giỏ, tạo mới giỏ hàng
+            Cart::create([
+                'product_id' => $this->productId,
+                'user_id' => Auth::id(),
+                'quantity' => $this->quantity
+            ]);
         }
 
         $this->isInCart = true;
         $this->js("toastr.success('Đã thêm sản phẩm vào giỏ hàng!')");
+        $this->dispatch('cartUpdated')->to(DropdownCart::class);;
     }
 
     public function buyNow()

@@ -10,17 +10,15 @@ use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-#[Title('Quản lý sản phẩm')] 
-#[Layout('admin.app')] 
-#[Lazy]
+#[Title('Quản lý sản phẩm')]
 class ProductList extends Component
 {
     use WithPagination;
 
-    public $search = ''; 
+    public $search = '';
     public $category_id;
     public $sortField = 'created_at';
-    public $sortDirection = 'desc'; 
+    public $sortDirection = 'desc';
     public $filterCriteria;
     public $priceRange = [];
 
@@ -91,8 +89,8 @@ class ProductList extends Component
         return view('livewire.admin.product.product-list', [
             'products' => $products,
             'categories' => $categories
-        ]);
-        // ->extends('admin.app')
-        // ->layoutData(['title' => 'Quản lý sản phẩm']);
+        ])
+            ->extends('admin.app')
+            ->layoutData(['title' => 'Quản lý sản phẩm']);
     }
 }

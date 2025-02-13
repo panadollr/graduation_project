@@ -16,7 +16,7 @@ class ProductEditor extends Component
     use WithFileUploads;
 
     public $productData = [
-        'name' => '', 
+        'name' => '',
         'slug' => '',
         'base_price' => 0,
         'sale_price' => 0,
@@ -46,22 +46,22 @@ class ProductEditor extends Component
         } else {
             $rules['productData.featured_image'] = 'nullable';
         }
-    
+
         return $rules;
-    }   
-    
+    }
+
     public function messages()
     {
         return [
             'productData.name.required' => 'Tên sản phẩm là bắt buộc.',
             'productData.name.string' => 'Tên sản phẩm phải là chuỗi ký tự.',
             'productData.name.max' => 'Tên sản phẩm không được dài quá 255 ký tự.',
-            
+
             'productData.slug.required' => 'Slug sản phẩm là bắt buộc.',
             'productData.slug.string' => 'Slug sản phẩm phải là chuỗi ký tự.',
             'productData.slug.unique' => 'Slug này đã tồn tại, vui lòng chọn slug khác.',
             'productData.slug.max' => 'Slug sản phẩm không được dài quá 255 ký tự.',
-            
+
             'productData.category_id.required' => 'Danh mục sản phẩm là bắt buộc.',
             'productData.category_id.exists' => 'Danh mục sản phẩm không hợp lệ.',
 
@@ -84,7 +84,7 @@ class ProductEditor extends Component
             // 'productData.quantity.min' => 'Số lượng sản phẩm phải lớn hơn 0.',
         ];
     }
-    
+
     public $categories;
     public $productId = null; // Sử dụng để xác định xem đang tạo mới hay chỉnh sửa
 
@@ -98,7 +98,7 @@ class ProductEditor extends Component
             $this->productData['additional_images'] = json_decode($product->additional_images, true) ?? [];
         }
     }
-    
+
     public function removeProductImage($index)
     {
         if (isset($this->productData['additional_images'][$index])) {
@@ -113,7 +113,7 @@ class ProductEditor extends Component
         }
     }
 
-    public function handleImageUpload(){}
+    public function handleImageUpload() {}
 
     public function saveProduct()
     {
@@ -159,13 +159,13 @@ class ProductEditor extends Component
             $this->productData
         );
 
-        $message = $this->productId 
-        ? "Đã cập nhật sản phẩm có ID: $this->productId" 
-        : "Đã thêm mới sản phẩm có ID: $product->id";
+        $message = $this->productId
+            ? "Đã cập nhật sản phẩm có ID: $this->productId"
+            : "Đã thêm mới sản phẩm có ID: $product->id";
 
-        Log::logAction(Auth::id(), $this->productId 
-        ? "Đã cập nhật sản phẩm có ID: $this->productId" 
-        : "Đã thêm mới sản phẩm có ID: $product->id");
+        Log::logAction(Auth::id(), $this->productId
+            ? "Đã cập nhật sản phẩm có ID: $this->productId"
+            : "Đã thêm mới sản phẩm có ID: $product->id");
 
         session()->flash('success', $this->productId ? 'Cập nhật sản phẩm thành công' : 'Thêm sản phẩm thành công');
         return redirect()->route('admin.product.index');
@@ -176,7 +176,7 @@ class ProductEditor extends Component
         return view('livewire.admin.product.product-editor', [
             'title' => $this->productId ? 'Chỉnh sửa sản phẩm' : 'Thêm sản phẩm mới'
         ])->extends('admin.app')
-        ->section('content')
-        ->layoutData(['title' => $this->productId ? 'Chỉnh sửa sản phẩm' : 'Thêm sản phẩm mới']);
+            ->section('content')
+            ->layoutData(['title' => $this->productId ? 'Chỉnh sửa sản phẩm' : 'Thêm sản phẩm mới']);
     }
 }

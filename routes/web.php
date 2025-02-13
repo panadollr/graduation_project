@@ -8,9 +8,9 @@ use App\Http\Controllers\Client\ProductDetailController;
 use App\Http\Controllers\Client\ProductListController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/',[HomeController::class, 'index'])->name('home');
-Route::get('/san-pham/{product_slug}',[ProductDetailController::class, 'index'])->name('product');
-Route::get('/danh-sach/{category_slug}',[ProductListController::class, 'index'])->name('list');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/san-pham/{product_slug}', [ProductDetailController::class, 'index'])->name('product');
+Route::get('/danh-sach/{category_slug}', [ProductListController::class, 'index'])->name('list');
 Route::get('/tim-kiem', [ProductListController::class, 'search'])->name('search');
 Route::prefix('bai-viet')->as('blog.')->group(function () {
     Route::get('/', App\Livewire\Client\Blog\BlogList::class)->name('index');
@@ -27,11 +27,10 @@ Route::middleware('user')->group(function () {
         Route::get('/dang-xuat', 'logout')->name('logout');
     });
 
-    Route::get('/thanh-toan',[CheckoutController::class, 'index'])->name('checkout.index');
-    Route::get('/vnpay/return',[CheckoutController::class, 'vnpayReturn'])->name('checkout.vnpay-return');
-    Route::get('/thanh-toan/thanh-cong',[CheckoutController::class, 'checkoutSuccess'])->name('checkout.success');
-    Route::get('/gio-hang',[CartController::class, 'index'])->name('cart.index');
-
+    Route::get('/thanh-toan', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::get('/vnpay/return', [CheckoutController::class, 'vnpayReturn'])->name('checkout.vnpay-return');
+    Route::get('/thanh-toan/thanh-cong', [CheckoutController::class, 'checkoutSuccess'])->name('checkout.success');
+    Route::get('/gio-hang', [CartController::class, 'index'])->name('cart.index');
 });
 
 // Include routes cho admin

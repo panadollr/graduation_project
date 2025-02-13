@@ -24,37 +24,18 @@ class Login extends Component
         'password.min' => 'Mật khẩu phải có ít nhất 6 ký tự.',
     ];
 
-    // public function login()
-    // {
-    //     $this->validate();
-
-    //     if (Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
-    //         Log::logAction(auth()->id(), 'Đã đăng nhập vào hệ thống !');
-    //         return $this->redirect(request()->header('Referer', '/'), navigate: true);
-    //     }
-
-    //     // Nếu thất bại, hiển thị thông báo lỗi
-    //     $this->js("toastr.error('Thông tin đăng nhập không chính xác')");
-    // }
-
     public function login()
     {
-        try {
-            $this->validate();
+        $this->validate();
 
-            if (Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
-                Log::logAction(auth()->id(), 'Đã đăng nhập vào hệ thống !');
-                return $this->redirect(request()->header('Referer', '/'), navigate: true);
-            }
-
-            // Nếu thất bại, hiển thị thông báo lỗi
-            $this->js("toastr.error('Thông tin đăng nhập không chính xác')");
-        } catch (\Exception $e) {
-            // Hiển thị thông báo lỗi ra giao diện với chi tiết thông báo lỗi
-            $this->js("toastr.error('Lỗi: " . addslashes($e->getMessage()) . "')");
+        if (Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
+            Log::logAction(auth()->id(), 'Đã đăng nhập vào hệ thống !');
+            return $this->redirect(request()->header('Referer', '/'), navigate: true);
         }
-    }
 
+        // Nếu thất bại, hiển thị thông báo lỗi
+        $this->js("toastr.error('Thông tin đăng nhập không chính xác')");
+    }
 
     public function render()
     {
